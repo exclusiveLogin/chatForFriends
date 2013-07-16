@@ -9,7 +9,7 @@ $(document).ready(function() {
         
     
     
-    var socket = io.connect('http://chatonsockets.serenity.c9.io');
+    var socket = io.connect('http://chatforfriends.serenity.c9.io');
     var nickname;
     var autoscroll = true;
     $('#autoscroll').addClass('autoscrollOn');
