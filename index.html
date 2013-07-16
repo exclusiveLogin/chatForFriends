@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Chat for Friends(CFF)</title>
+<script type="text/javascript" src="script/jquery-1.9.1.js"></script>
+<script type="text/javascript" src="script/jquery-migrate-1.1.1.js"></script>
+<script type="text/javascript" src="script/start.js"></script>
+<script type="text/javascript" src="node_modules/socket.io/node_modules/socket.io-client/dist/socket.io.js"></script>
+<link rel="stylesheet" href="style/default.css">
+</head>
+<body>
+<div id="globalContainer">
+    <div id="globalHeader">
+        <div id="logo">Summer Bar</div>
+        <div id="status">Включите JS</div>
+        <span class="miniTextP">Powered by eXclusive Login 2013</span>
+    </div>
+	<div id="chat">
+    	<div id="chatHeader">
+            <span id="chatHeaderText">Введите свой ник:</span>
+            <input type="text" id="nickName" value="Гость">
+            <input type="button" value="Войти" id="nickNameSubmit">
+            <div id="autoscroll" class="autoscrollOn">автоскролл</div>
+            <div id="soundToggle" class="autoscrollOn">звук</div>
+        </div>
+        <div id="chatBody">
+        	
+        </div>
+    </div>
+    <div id="contactList">
+    	<div id="contactListHeader">Участники чата</div>
+        <div id="contactListBody">
+        	
+        </div>
+    </div>
+    <div id="globalFooter">
+		<input type="text" id="msgBox">
+        <div id="msgSend"></div>
+        <span class="miniText">Отправка сообщений возможна по клавише Enter</span>
+	</div>
+</div>
+<audio id="msg_sound" autobuffer preload>
+    <source src="audio/msg.ogg" type="audio/ogg">
+    <source src="audio/msg.mp3" type="audio/ogg">
+</audio>
+<audio id="msg_sound_out" autobuffer preload>
+    <source src="audio/msg_out.ogg" type="audio/ogg">
+    <source src="audio/msg_out.mp3" type="audio/ogg">
+</audio>
+</body>
+</html>
