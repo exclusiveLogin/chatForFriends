@@ -103,7 +103,7 @@ $(document).ready(function() {
         
     });
     
-    socket.on('disconnect', function(data){
+    socket.on('disconnect', function(){
         $('#chat').fadeOut(1000);
         $('#contactList').fadeOut(1000);
         $('#globalFooter').fadeOut(1000);
@@ -123,10 +123,12 @@ $(document).ready(function() {
         $('#nickNameSubmit').fadeOut(1000);
         $('#nickName').fadeOut(1000);
         $('#chatHeaderText').text('Вы вошли как '+nickname);
+        $('#exitSubmit').fadeIn(1000);
         $('#msgBox').focus();
         nickNameSend();
         
     }
+    
     
     //Client side logic
     
@@ -165,7 +167,9 @@ $(document).ready(function() {
         }
         else;
     });
-    
+    $('#exitSubmit').click(function() {
+        exitSubmit();
+    });
     $('#autoscroll').click(function() {
         $(this).toggleClass('autoscrollOn');
         autoscroll=!autoscroll;
@@ -174,7 +178,14 @@ $(document).ready(function() {
         $(this).toggleClass('autoscrollOn');
         soundToggle=!soundToggle;
     });
-    
+    function exitSubmit(){
+        socket.emit('exit');
+        $('#chatHeaderText').text('Введите свой ник:');
+        $('#nickNameSubmit').fadeIn(1000);
+        $('#nickName').fadeIn(1000);
+        $('#exitSubmit').fadeOut(1000);
+        $('#nickName').val('');
+    }
     function autoscrolling(){
         if(autoscroll){
             var scroll = $('#chatBody')[0].scrollHeight;

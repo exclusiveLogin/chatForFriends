@@ -17,6 +17,11 @@ io.configure(function () {
 		socket.on('msg', function(data){
 			io.sockets.emit('send',{'nick':members[socket.id],'msg':data});			
 			});
+        socket.on('exit', function(){
+            var userDis = members[socket.id];
+    		members[socket.id]='Гость:'+id+'...';
+            io.sockets.emit('cl', {'members':members,'msg':userDis+' выходит, его новый ник: '+members[socket.id]});
+			});
 		socket.on('nickname',function(data){
 			members[socket.id]=data;
 			io.sockets.emit('welcome','К нам входит '+data+'. Добро пожаловать!');
