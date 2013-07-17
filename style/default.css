@@ -324,3 +324,13 @@ body{
     color:#0F0 !important;
     text-shadow:0 0 5px #0F0;
 }
+#exitSubmit{
+    display:none;
+    height:18px;
+    font-size:10px;
+    position:relative;
+    top:-1px;
+    background-color:#333;
+    color:#CCC;
+    border:#ccc solid 1px;
+}
