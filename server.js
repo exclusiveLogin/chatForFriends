@@ -1,8 +1,8 @@
 var io = require('socket.io').listen(Number(process.env.PORT));
 var members={};
 io.configure(function () {
-    io.set('transports', [
-    'flashsocket'
+    io.set('transports', ['websocket'
+  , 'flashsocket'
   , 'htmlfile'
   , 'xhr-polling'
   , 'jsonp-polling'
@@ -12,7 +12,6 @@ io.configure(function () {
 	io.sockets.on('connection', function (socket) {		
         var id = socket.id.substring(0,7);
         members[socket.id]='Гость:'+id+'...';
-        socket.emit('connected');
         io.sockets.emit('cl', {'members':members});
 		socket.on('msg', function(data){
 			io.sockets.emit('send',{'nick':members[socket.id],'msg':data});			

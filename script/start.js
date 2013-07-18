@@ -8,21 +8,48 @@ $(document).ready(function() {
 		});
         
     
-    
-    var socket = io.connect('http://chatforfriends.serenity.c9.io');
+    if($.browser.webkit){
+        var socket = io.connect('http://chatforfriends.serenity.c9.io',{
+            'connect timeout': 60000,
+            'reconnect': true,
+            'reconnection delay':5000,
+            'reconnection limit': 60000,
+            'transports':['websocket', 'flashsocket', 'htmlfile', 'xhr-multipart', 'xhr-polling', 'jsonp-polling']
+        });
+    }
+    else{
+        var socket = io.connect('http://chatforfriends.serenity.c9.io',{
+            'connect timeout': 60000,
+            'reconnect': true,
+            'reconnection delay':5000,
+            'reconnection limit': 60000,
+            'transports':['flashsocket', 'htmlfile', 'xhr-multipart', 'xhr-polling', 'jsonp-polling']
+        });
+    }
     var nickname;
     var autoscroll = true;
     $('#autoscroll').addClass('autoscrollOn');
     var msg_in = document.getElementById('msg_sound');
     var msg_out = document.getElementById('msg_sound_out');
     var soundToggle = true;
+    var timer_reconnect;
+    
+    function selfDisconnect(){
+        socket.disconnect();
+		clearTimeout(timer_reconnect);
+		timer_reconnect=false;
+        $('#status').text('Отключено').css({
+            'text-shadow':'0 0 5px #F00',
+            'color':'#F00'
+        });
+    }
     
     $('#status').text('Отключено').css({
             'text-shadow':'0 0 5px #F00',
             'color':'#F00'
         });
     
-    socket.on('connected', function(data){
+    socket.on('connect', function(){
         $('#chat').fadeIn(1000);
         $('#contactList').fadeIn(1000);
         if(nickname){
@@ -34,42 +61,45 @@ $(document).ready(function() {
         $('#status').text('Подключено').css({
             'text-shadow':'0 0 5px #0F0',
             'color':'#0F0'
-        });        
+        });   
+        if(timer_reconnect){
+            clearTimeout(timer_reconnect);
+			timer_reconnect = false;
+        }
+        else;
     });
     
     socket.on('connecting', function(){        
         $('#status').text('Подключение').css({
             'text-shadow':'0 0 5px #0FF',
             'color':'#0FF'
-        });        
-    });
-    
-    socket.on('connect_failed', function(){        
-        $('#status').text('Ошибка сети').css({
-            'text-shadow':'0 0 5px #F00',
-            'color':'#F00'
-        });        
-    });
-    
-    socket.on('reconnect_failed', function(){        
-        $('#status').text('Ошибка сети!').css({
-            'text-shadow':'0 0 5px #F00',
-            'color':'#F00'
-        });        
+        });
     });
     
     socket.on('reconnecting', function(){        
         $('#status').text('Переподключение').css({
             'text-shadow':'0 0 5px #0FF',
             'color':'#0FF'
-        });        
+        });
+	if(timer_reconnect){} 
+	else{       
+        timer_reconnect = setTimeout(function() {
+            selfDisconnect();
+        	}, 60000);
+		}
     });
     
-    socket.on('error', function(){        
-        $('#status').text('Общая ошибка').css({
+    socket.on('error', function(reason){        
+        $('#status').text('Ошибка сервера').css({
             'text-shadow':'0 0 5px #F00',
             'color':'#F00'
-        });        
+        });
+	if(timer_reconnect){}
+	else{
+        timer_reconnect = setTimeout(function() {
+            selfDisconnect();
+        	}, 5000);
+		}
     });
     
     socket.on('welcome', function(data){
@@ -215,6 +245,7 @@ $(document).ready(function() {
         $('#nickName').fadeIn(1000);
         $('#exitSubmit').fadeOut(1000);
         $('#nickName').val('');
+        $('#globalFooter').fadeOut(1000);
     }
     function autoscrolling(){
         if(autoscroll){
