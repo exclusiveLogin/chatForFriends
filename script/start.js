@@ -37,6 +37,41 @@ $(document).ready(function() {
         });        
     });
     
+    socket.on('connecting', function(){        
+        $('#status').text('Подключение').css({
+            'text-shadow':'0 0 5px #0FF',
+            'color':'#0FF'
+        });        
+    });
+    
+    socket.on('connect_failed', function(){        
+        $('#status').text('Ошибка сети').css({
+            'text-shadow':'0 0 5px #F00',
+            'color':'#F00'
+        });        
+    });
+    
+    socket.on('reconnect_failed', function(){        
+        $('#status').text('Ошибка сети!').css({
+            'text-shadow':'0 0 5px #F00',
+            'color':'#F00'
+        });        
+    });
+    
+    socket.on('reconnecting', function(){        
+        $('#status').text('Переподключение').css({
+            'text-shadow':'0 0 5px #0FF',
+            'color':'#0FF'
+        });        
+    });
+    
+    socket.on('error', function(){        
+        $('#status').text('Общая ошибка').css({
+            'text-shadow':'0 0 5px #F00',
+            'color':'#F00'
+        });        
+    });
+    
     socket.on('welcome', function(data){
        var msg = '<div class="chatCellSys">'+
                 '<div class="chatCellHeader">Системное сообщение</div>'+
