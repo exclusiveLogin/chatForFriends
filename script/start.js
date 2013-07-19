@@ -1,4 +1,29 @@
-// Client side Events
+var Global={};
+    Global.nickname;
+    Global.autoscroll = true;    
+    
+    Global.soundToggle = true;
+    Global.timer_reconnect;
+    Global.socket;
+    
+    Global.nickNameSend = function(){
+        Global.socket.emit('nickname', Global.nickname);        
+    }
+    Global.nickNameSubmit = function(){
+        $('#nickName').val('');
+        $('#globalFooter').fadeIn(1000);
+        $('#nickNameSubmit').hide(1000);
+        $('#nickName').hide(1000);
+        $('#chatHeaderText').text('Вы вошли как '+Global.nickname);
+        $('#exitSubmit').show(1000);
+        $('#msgBox').focus();
+        Global.nickNameSend();
+        
+    }
+
+var snd_in = document.getElementById('msg_sound_in');
+var snd_out = document.getElementById('msg_sound_out');
+
 $(document).ready(function() {
     $('#msgSend').mousedown(function(){
 		$(this).addClass('msgSendClick');
@@ -7,9 +32,10 @@ $(document).ready(function() {
 		$(this).removeClass('msgSendClick');
 		});
         
+    $('#autoscroll').addClass('autoscrollOn');
     
     if($.browser.webkit){
-        var socket = io.connect('http://chatforfriends.serenity.c9.io',{
+        Global.socket = io.connect('http://chatforfriends.serenity.c9.io',{
             'connect timeout': 60000,
             'reconnect': true,
             'reconnection delay':5000,
@@ -18,7 +44,7 @@ $(document).ready(function() {
         });
     }
     else{
-        var socket = io.connect('http://chatforfriends.serenity.c9.io',{
+        Global.socket = io.connect('http://chatforfriends.serenity.c9.io',{
             'connect timeout': 60000,
             'reconnect': true,
             'reconnection delay':5000,
@@ -26,18 +52,12 @@ $(document).ready(function() {
             'transports':['flashsocket', 'htmlfile', 'xhr-multipart', 'xhr-polling', 'jsonp-polling']
         });
     }
-    var nickname;
-    var autoscroll = true;
-    $('#autoscroll').addClass('autoscrollOn');
-    var msg_in = document.getElementById('msg_sound');
-    var msg_out = document.getElementById('msg_sound_out');
-    var soundToggle = true;
-    var timer_reconnect;
+    
     
     function selfDisconnect(){
-        socket.disconnect();
-		clearTimeout(timer_reconnect);
-		timer_reconnect=false;
+        Global.socket.disconnect();
+		clearTimeout(Global.timer_reconnect);
+		Global.timer_reconnect=false;
         $('#status').text('Отключено').css({
             'text-shadow':'0 0 5px #F00',
             'color':'#F00'
@@ -49,12 +69,12 @@ $(document).ready(function() {
             'color':'#F00'
         });
     
-    socket.on('connect', function(){
+    Global.socket.on('connect', function(){
         $('#chat').fadeIn(1000);
         $('#contactList').fadeIn(1000);
-        if(nickname){
+        if(Global.nickname){
             $('#globalFooter').fadeIn(1000);
-            nickNameSend();
+            Global.nickNameSend();
         }
         else;
         
@@ -62,47 +82,47 @@ $(document).ready(function() {
             'text-shadow':'0 0 5px #0F0',
             'color':'#0F0'
         });   
-        if(timer_reconnect){
-            clearTimeout(timer_reconnect);
-			timer_reconnect = false;
+        if(Global.timer_reconnect){
+            clearTimeout(Global.timer_reconnect);
+			Global.timer_reconnect = false;
         }
         else;
     });
     
-    socket.on('connecting', function(){        
+    Global.socket.on('connecting', function(){        
         $('#status').text('Подключение').css({
             'text-shadow':'0 0 5px #0FF',
             'color':'#0FF'
         });
     });
     
-    socket.on('reconnecting', function(){        
+    Global.socket.on('reconnecting', function(){        
         $('#status').text('Переподключение').css({
             'text-shadow':'0 0 5px #0FF',
             'color':'#0FF'
         });
-	if(timer_reconnect){} 
+	if(Global.timer_reconnect){} 
 	else{       
-        timer_reconnect = setTimeout(function() {
+        Global.timer_reconnect = setTimeout(function() {
             selfDisconnect();
         	}, 60000);
 		}
     });
     
-    socket.on('error', function(reason){        
+    Global.socket.on('error', function(reason){        
         $('#status').text('Ошибка сервера').css({
             'text-shadow':'0 0 5px #F00',
             'color':'#F00'
         });
-	if(timer_reconnect){}
+	if(Global.timer_reconnect){}
 	else{
-        timer_reconnect = setTimeout(function() {
+        Global.timer_reconnect = setTimeout(function() {
             selfDisconnect();
         	}, 5000);
 		}
     });
     
-    socket.on('welcome', function(data){
+    Global.socket.on('welcome', function(data){
        var msg = '<div class="chatCellSys">'+
                 '<div class="chatCellHeader">Системное сообщение</div>'+
                 '<div class="chatCellBodySys">'+data+
@@ -111,15 +131,15 @@ $(document).ready(function() {
         autoscrolling();
     });
     
-    socket.on('send', function(data){
+    Global.socket.on('send', function(data){
         var msg;
-        if (data.nick == nickname) {
+        if (data.nick == Global.nickname) {
             msg = '<div class="chatCellSelf">'+
                 '<div class="chatCellHeader">Вы пишете:</div>'+
                 '<div class="chatCellBodySelf">'+data.msg+
                 '</div></div>'; 
-                if (soundToggle) {
-                    msg_out.play();
+                if(Global.soundToggle) {
+                    snd_in.play();
                 }
                 else;                
         }
@@ -128,8 +148,8 @@ $(document).ready(function() {
                 '<div class="chatCellHeader">'+data.nick+' пишет:</div>'+
                 '<div class="chatCellBody">'+data.msg+
                 '</div></div>';
-                if (soundToggle) {
-                    msg_in.play();
+                if(Global.soundToggle) {
+                    snd_out.play();
                 }
                 else;
         }
@@ -138,14 +158,14 @@ $(document).ready(function() {
         autoscrolling();        
     });
     
-    function sendMsg(data){
+    function sendMsg(){
         var msg = $('#msgBox').val();
         $('#msgBox').val('');
-        socket.emit('msg', msg);
+        Global.socket.emit('msg', msg);
     }
     
     
-    socket.on('cl', function(data){
+    Global.socket.on('cl', function(data){
         $('#contactListBody').empty();
         for(var i in data.members){
             var contact = '<div class="contactUnit">'+data.members[i]+'</div>';
@@ -163,7 +183,7 @@ $(document).ready(function() {
         
     });
     
-    socket.on('disconnect', function(){
+    Global.socket.on('disconnect', function(){
         $('#chat').fadeOut(1000);
         $('#contactList').fadeOut(1000);
         $('#globalFooter').fadeOut(1000);
@@ -174,35 +194,22 @@ $(document).ready(function() {
         });
     });
     
-    function nickNameSend(){
-        socket.emit('nickname', nickname);        
-    }
-    function nickNameSubmit(){
-        $('#nickName').val('');
-        $('#globalFooter').fadeIn(1000);
-        $('#nickNameSubmit').hide(1000);
-        $('#nickName').hide(1000);
-        $('#chatHeaderText').text('Вы вошли как '+nickname);
-        $('#exitSubmit').show(1000);
-        $('#msgBox').focus();
-        nickNameSend();
-        
-    }
+    
     
     
     //Client side logic
     
     $('#nickNameSubmit').click(function(){
         if($('#nickName').val()){
-            nickname = $('#nickName').val();
-            nickNameSubmit();
+            Global.nickname = $('#nickName').val();
+            Global.nickNameSubmit();
         }
         else;
     });
     $('#nickName').keypress(function(e){
         if(e.which == 13){
-            nickname = $('#nickName').val();
-            nickNameSubmit();
+            Global.nickname = $('#nickName').val();
+            Global.nickNameSubmit();
         }
         else;
     });
@@ -232,14 +239,14 @@ $(document).ready(function() {
     });
     $('#autoscroll').click(function() {
         $(this).toggleClass('autoscrollOn');
-        autoscroll=!autoscroll;
+        Global.autoscroll=!Global.autoscroll;
     });
     $('#soundToggle').click(function() {
         $(this).toggleClass('autoscrollOn');
-        soundToggle=!soundToggle;
+        Global.soundToggle=!Global.soundToggle;
     });
     function exitSubmit(){
-        socket.emit('exit');
+        Global.socket.emit('exit');
         $('#chatHeaderText').text('Введите свой ник:');
         $('#nickNameSubmit').show(1000);
         $('#nickName').show(1000);
@@ -248,7 +255,7 @@ $(document).ready(function() {
         $('#globalFooter').fadeOut(1000);
     }
     function autoscrolling(){
-        if(autoscroll){
+        if(Global.autoscroll){
             var scroll = $('#chatBody')[0].scrollHeight;
             $('#chatBody').animate({'scrollTop':scroll},1000);
         }
