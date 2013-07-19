@@ -180,10 +180,10 @@ $(document).ready(function() {
     function nickNameSubmit(){
         $('#nickName').val('');
         $('#globalFooter').fadeIn(1000);
-        $('#nickNameSubmit').fadeOut(1000);
-        $('#nickName').fadeOut(1000);
+        $('#nickNameSubmit').hide(1000);
+        $('#nickName').hide(1000);
         $('#chatHeaderText').text('Вы вошли как '+nickname);
-        $('#exitSubmit').fadeIn(1000);
+        $('#exitSubmit').show(1000);
         $('#msgBox').focus();
         nickNameSend();
         
@@ -241,9 +241,9 @@ $(document).ready(function() {
     function exitSubmit(){
         socket.emit('exit');
         $('#chatHeaderText').text('Введите свой ник:');
-        $('#nickNameSubmit').fadeIn(1000);
-        $('#nickName').fadeIn(1000);
-        $('#exitSubmit').fadeOut(1000);
+        $('#nickNameSubmit').show(1000);
+        $('#nickName').show(1000);
+        $('#exitSubmit').hide(1000);
         $('#nickName').val('');
         $('#globalFooter').fadeOut(1000);
     }

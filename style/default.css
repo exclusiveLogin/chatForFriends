@@ -8,7 +8,6 @@ html{
 	height:100%;
 	overflow:hidden;    
 	}
-
 body{
 	background-color:#333;
 	height:100%;
@@ -334,4 +333,12 @@ body{
     background-color:#333;
     color:#CCC;
     border:#ccc solid 1px;
+}
+#fork{
+    background-image:url(git.png);
+    width:216px;
+    height:216px;
+    position:fixed;
+    right:-30px;
+    top:-30px;
 }
