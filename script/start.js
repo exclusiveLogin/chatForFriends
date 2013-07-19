@@ -21,10 +21,13 @@ var Global={};
         
     }
 
-var snd_in = document.getElementById('msg_sound_in');
-var snd_out = document.getElementById('msg_sound_out');
+
 
 $(document).ready(function() {
+    
+    var snd_in = document.getElementById('msg_sound_in');
+    var snd_out = document.getElementById('msg_sound_out');
+
     $('#msgSend').mousedown(function(){
 		$(this).addClass('msgSendClick');
 		});
