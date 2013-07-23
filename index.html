@@ -8,6 +8,8 @@
 <script type="text/javascript" src="script/start.js"></script>
 <script type="text/javascript" src="script/global.js"></script>
 <script type="text/javascript" src="script/socket.js"></script>
+<script type="text/javascript" src="script/mongo.js"></script>
+<script type="text/javascript" src="script/users.js"></script>
 <script type="text/javascript" src="node_modules/socket.io/node_modules/socket.io-client/dist/socket.io.js"></script>
 <link rel="stylesheet" href="style/default.css">
 </head>
@@ -18,6 +20,38 @@
         <div id="logo">Summer Bar</div>
         <div id="status">Включите JS</div>
         <span class="miniTextP">Powered by eXclusive Login 2013</span>
+    </div>
+    <div id="userRegistration">
+        Вы используете свободный никнейм<br>
+        Вы хотите зарегистрировать его в системе?<br>
+        <div id="userRegAsk">
+        <input type="button" value="Да" id="userRegYes">
+        <input type="button" value="Нет" id="userRegNo">
+        </div>
+        <center><div id="userPass">
+            <span class="leftTest">Введите ваш новый пароль</span><br>
+            <input type="password" id="newUserPass" class="pwdInput"><br>
+            <span class="leftTest">Подтверждение пароля</span><br>
+            <input type="password" id="newUserPassConfirm" class="pwdInput">
+            <span class="warningText" id="userRegWarn">Пароли должны совпадать и не быть пустыми</span>
+            <input type="button" value="Сохранить" id="userRegSubmit">
+            <input type="button" value="Отмена" id="userRegCancel">
+        </div></center>
+    </div>
+    <div id="userAuthorization">
+        Вы ввели занятый никнейм<br>
+        Вы хотите войти используя ваш пароль?<br>
+        <div id="userAuthAsk">
+        <input type="button" value="Да" id="userAuthYes">
+        <input type="button" value="Нет" id="userAuthNo">
+        </div>
+        <center><div id="authUserPass">
+            <span>Введите пароль</span><br>
+            <input type="password" id="oldUserPass" class="pwdInput"><br>
+            <span class="warningText" id="userAuthWarn">Пароль не должен быть пустым</span>
+            <input type="button" value="Войти" id="userAuthSubmit">
+            <input type="button" value="Отмена" id="userAuthCancel">
+        </div></center>
     </div>
 	<div id="chat">
     	<div id="chatHeader">

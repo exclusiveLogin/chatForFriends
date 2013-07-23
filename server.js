@@ -1,5 +1,6 @@
 var io = require('socket.io').listen(Number(process.env.PORT));
 var members={};
+var users={};
 io.configure(function () {
     io.set('transports', ['websocket'
   , 'flashsocket'
@@ -13,12 +14,13 @@ io.configure(function () {
         var id = socket.id.substring(0,7);
         members[socket.id]='Гость:'+id+'...';
         io.sockets.emit('cl', {'members':members});
+        io.sockets.emit('users',users);
 		socket.on('msg', function(data){
 			io.sockets.emit('send',{'nick':members[socket.id],'msg':data});			
 			});
         socket.on('exit', function(){
             var userDis = members[socket.id];
-    		members[socket.id]='Гость:'+id+'...';
+            members[socket.id]='Гость:'+id+'...';
             io.sockets.emit('cl', {'members':members,'msg':userDis+' выходит, его новый ник: '+members[socket.id]});
 			});
 		socket.on('nickname',function(data){
@@ -31,4 +33,36 @@ io.configure(function () {
             delete members[socket.id];
             io.sockets.emit('cl', {'members':members,'msg':userDis+' покидает нас..:('});
 			});
+        var userAdd = function(data){
+            var username = members[socket.id];
+            users[username] = data;
+            io.sockets.emit('cl', {'members':members,'msg':'Регистрация нового участника, '+username+' Добро пожаловать!!! :)'});
+            io.sockets.emit('users',users);
+			};
+        var userRemove = function(){
+            var username = members[socket.id];
+            delete users[username];
+			};
+        socket.on('existUser', function(data){
+            var username = members[socket.id];
+            var userPwd = users[username];
+            if(data == userPwd){
+                socket.emit('userAccess', 'Вы успешно вошли как '+ username);
+                io.sockets.emit('welcome','К нам входит '+username+'. Добро пожаловать!');
+                io.sockets.emit('cl', {'members':members});
+            }
+            else{
+                socket.emit('userDenied', 'Ошибка пароля, вход не выполнен');
+            }
+    		});
+        socket.on('registrationUser',function(data){
+            var userName = members[socket.id];
+            var newUserPwd = data.password;
+            if(users[userName]){
+                socket.emit('welcome', 'Ошибка при регистрации, ник не прошел валидацию');
+            }
+            else{
+                userAdd(newUserPwd);
+            }
+    		});
   	});

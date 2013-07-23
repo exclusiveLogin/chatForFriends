@@ -138,4 +138,32 @@ Global.socket.on('connect', function(){
             'color':'#F00'
         });
     });
+    
+    Global.socket.on('users', function(data){
+        Global.usersList = data;
+    });
+    
+    Global.socket.on('userAccess', function(data){
+        var msg = '<div class="chatCellSys">'+
+            '<div class="chatCellHeader">Системное сообщение</div>'+
+            '<div class="chatCellBodySys">'+data+
+            '</div></div>';
+        $('#chatBody').append(msg);
+        Global.autoscrolling();
+        $('#nickName').val('');
+        $('#globalFooter').fadeIn(1000);
+        $('#nickNameSubmit').hide(1000);
+        $('#nickName').hide(1000);
+        $('#exitSubmit').show(1000);
+        $('#msgBox').focus();
+    });
+    
+    Global.socket.on('userDenied', function(data){
+        var msg = '<div class="chatCellSys">'+
+            '<div class="chatCellHeader">Системное сообщение</div>'+
+            '<div class="chatCellBodySys">'+data+
+            '</div></div>';
+        $('#chatBody').append(msg);
+        Global.autoscrolling(); 
+    });
 });
