@@ -20,6 +20,11 @@ $(document).ready(function() {
     $('#nickNameSubmit').click(function(){
         if($('#nickName').val()){
             Global.nickname = $('#nickName').val();
+            if(Global.nickname.length > 15)
+            {
+                Global.nickname = Global.nickname.substring(0 ,12)+'...';
+            }
+            else;            
             Global.nickNameSubmit();
         }
         else;
@@ -27,6 +32,11 @@ $(document).ready(function() {
     $('#nickName').keypress(function(e){
         if(e.which == 13){
             Global.nickname = $('#nickName').val();
+            if(Global.nickname.length > 15)
+            {
+                Global.nickname = Global.nickname.substring(0 ,12)+'...';
+            }
+            else;            
             Global.nickNameSubmit();
         }
         else;
