@@ -29,6 +29,26 @@ body{
 	min-height:400px;
 	padding-bottom:0px;
 	}
+#userRegistration{
+    width:50%;
+    background:#222;
+    border:2px outset #555;
+    margin:0 auto;
+    border-radius:20px;
+    color:#CCC;
+    font-family:Arial;
+    padding:10px;
+}
+.pwdInput{
+    width:90%;
+}
+#userRegAsk{
+    
+}
+#userPass{
+    margin:0 auto;
+    display:none;
+}
 #chat{
 	background-color:#222;
 	width:440px;

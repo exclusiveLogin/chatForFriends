@@ -138,4 +138,8 @@ Global.socket.on('connect', function(){
             'color':'#F00'
         });
     });
+    
+    Global.socket.on('users', function(data){
+        Global.usersList = data;
+    });
 });
