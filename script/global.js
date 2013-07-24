@@ -1,7 +1,7 @@
 var Global={};
     Global.nickname;
     Global.autoscroll = true;    
-    Global.usersReg = {};
+    Global.users = {};
     Global.soundToggle = true;
     Global.timer_reconnect;
     Global.socket;
@@ -20,15 +20,19 @@ var Global={};
         Global.nickNameSend();
     }
     Global.userCheck = function(){//Проверка имеется ли такой никнейм
+        alert('Вход в UserCheck = true');
         if(Global.users[Global.nickname]){//Если да, то просим ввести его пароль
+            alert('UserCheck = true');
             Global.userAuth();
         }
         else{//если нет, спрашиваем создать ли его в системе
+            alert('UserCheck = false');
             Global.userAsk();
         }
     }
     Global.userAsk = function(){
         $(document).ready(function(){
+            alert('UserAsk');
             $('#userRegistration').show(1000);//показываем диалог
             $('#userRegAsk').show(1000);//показываем вопрос
             $('#userRegYes').click(function(){
@@ -59,6 +63,7 @@ var Global={};
         });
     }
     Global.userAuth = function(){
+        alert('UserAuth');
         $('#userAuthorization').show(1000);
         $('#userAuthAsk').show(1000);//показываем кнопки
         $('#userAuthYes').click(function(){

@@ -1,3 +1,5 @@
+alert('users = true');
 Global.socket.on('users', function(users){
-        Global.usersReg = users;
+        Global.users = users;
+        alert('Users: '+users);
     });
