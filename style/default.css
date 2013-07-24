@@ -49,7 +49,7 @@ body{
     color:#CCC;
     font-family:Arial;
     padding:10px;
-    /*display:none;*/
+    display:none;
 }
 .pwdInput{
     width:90%;
