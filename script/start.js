@@ -23,9 +23,9 @@ $(document).ready(function() {
             if(Global.nickname.length > 15)
             {
                 Global.nickname = Global.nickname.substring(0 ,12)+'...';
+                alert(Global.nickname);
             }
             else;   
-            alert('Запуск проверки по входу');
             Global.userCheck();
         }
         else;
@@ -38,7 +38,6 @@ $(document).ready(function() {
                 Global.nickname = Global.nickname.substring(0 ,12)+'...';
             }
             else;            
-            alert('Запуск проверки по Enter');
             Global.userCheck();
         }
         else;

@@ -17,6 +17,10 @@ if($.browser.webkit){
             'transports':['flashsocket', 'htmlfile', 'xhr-multipart', 'xhr-polling', 'jsonp-polling']
         });
     }
+Global.socket.on('users', function(users){
+        Global.users = users;
+        alert(users[Global.nickname]);
+    });
 
 Global.socket.on('connect', function(){
         $('#chat').fadeIn(1000);

@@ -33,15 +33,9 @@ io.configure(function () {
             delete members[socket.id];
             io.sockets.emit('cl', {'members':members,'msg':userDis+' покидает нас..:('});
 			});
-        var userAdd = function(data){
-            var username = members[socket.id];
-            users[username] = data;
-            io.sockets.emit('cl', {'members':members,'msg':'Регистрация нового участника, '+username+' Добро пожаловать!!! :)'});
+        var userAdd = function(nickname, password){
+            users[nickname] = password;
             io.sockets.emit('users',users);
-			};
-        var userRemove = function(){
-            var username = members[socket.id];
-            delete users[username];
 			};
         socket.on('existUser', function(data){
             var username = members[socket.id];
@@ -56,13 +50,15 @@ io.configure(function () {
             }
     		});
         socket.on('registrationUser',function(data){
-            var userName = members[socket.id];
-            var newUserPwd = data.password;
-            if(users[userName]){
+            if(users[data.nickname]){
                 socket.emit('welcome', 'Ошибка при регистрации, ник не прошел валидацию');
             }
             else{
-                userAdd(newUserPwd);
+                userAdd(data.nickname, data.password);
+                io.sockets.emit('welcome','Регистрация нового пользователя прошла успешно. '+data.nickname+' Добро пожаловать!');
+                members[socket.id]=data.nickname;
+                io.sockets.emit('cl', {'members':members});
+                io.sockets.emit('users',users);
             }
     		});
   	});

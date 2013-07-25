@@ -1,10 +1,10 @@
 var Global={};
     Global.nickname;
-    Global.autoscroll = true;    
-    Global.users = {};
+    Global.autoscroll = true;
     Global.soundToggle = true;
     Global.timer_reconnect;
     Global.socket;
+    Global.users = {};
     
     Global.nickNameSend = function(){
         Global.socket.emit('nickname', Global.nickname);        
@@ -20,7 +20,7 @@ var Global={};
         Global.nickNameSend();
     }
     Global.userCheck = function(){//Проверка имеется ли такой никнейм
-        alert('Вход в UserCheck = true');
+        alert('Проверка ника в массиве:'+Global.users[Global.nickname]);
         if(Global.users[Global.nickname]){//Если да, то просим ввести его пароль
             alert('UserCheck = true');
             Global.userAuth();
@@ -32,12 +32,11 @@ var Global={};
     }
     Global.userAsk = function(){
         $(document).ready(function(){
-            alert('UserAsk');
             $('#userRegistration').show(1000);//показываем диалог
-            $('#userRegAsk').show(1000);//показываем вопрос
+            $('#userRegAsk').show();//показываем вопрос
             $('#userRegYes').click(function(){
-                $('#userPass').show(1000);//показываем поля пароля
-                $('#userRegAsk').hide(1000);//прячем кнопки
+                $('#userPass').show();//показываем поля пароля
+                $('#userRegAsk').hide();//прячем кнопки
             });
             $('#userRegNo').click(function(){
                 $('#userRegistration').hide(1000);//закрываем диалог
@@ -50,6 +49,13 @@ var Global={};
                 if(newUserPass && newUserPass == newUserPassConfirm){
                     Global.userRegistration(newUserPass);
                     $('#userRegistration').hide(1000);
+                    $('#nickName').val('');
+                    $('#globalFooter').fadeIn(1000);
+                    $('#nickNameSubmit').hide(1000);
+                    $('#nickName').hide(1000);
+                    $('#chatHeaderText').text('Вы вошли как '+Global.nickname);
+                    $('#exitSubmit').show(1000);
+                    $('#msgBox').focus();
                     $('#userRegWarn').hide(100);
                 }
                 else{
@@ -63,13 +69,17 @@ var Global={};
         });
     }
     Global.userAuth = function(){
-        alert('UserAuth');
-        $('#userAuthorization').show(1000);
-        $('#userAuthAsk').show(1000);//показываем кнопки
-        $('#userAuthYes').click(function(){
-            $('#authUserPass').show(1000);//тут мы выводим поля пароля и анализ содержимого
-            $('#userAuthAsk').hide(1000);//прячем кнопки    
+        $(document).ready(function(){
+            $('#userAuthorization').show(1000);
+            $('#authUserPass').hide();
+            $('#userAuthAsk').show(1000);//показываем кнопки
+            $('#userAuthYes').click(function(){
+                $('#authUserPass').show(1000);//тут мы выводим поля пароля и анализ содержимого
+                $('#userAuthAsk').hide(1000);//прячем кнопки    
+                
+            });
             $('#userAuthSubmit').click(function() {//тут будет анализ пароля
+                alert('Pressed Submit');
                 if($('#oldUserPass').val()){
                     var oldUserPass = $('#oldUserPass').val();
                     Global.socket.emit('existUser', oldUserPass);
@@ -80,20 +90,21 @@ var Global={};
                     $('#userAuthWarn').show(100);
                 }
             });
-            $('#userAuthCancel').click(function() {//ут закрытие диалога
+            $('#userAuthCancel').click(function() {
+                    $('#userAuthorization').hide(1000);//прячем диалог
+                    $('#nickName').val('');
+                    $('#nickName').focus();
+                    alert('Pressed Cancel');
+            });
+            $('#userAuthNo').click(function(){
                 $('#userAuthorization').hide(1000);//прячем диалог
                 $('#nickName').val('');
                 $('#nickName').focus();
             });
         });
-        $('#userAuthNo').click(function(){
-            $('#userAuthorization').hide(1000);//прячем диалог
-            $('#nickName').val('');
-            $('#nickName').focus();
-        });
     }
     Global.userRegistration = function(data){
-        
+        Global.socket.emit('registrationUser', {'nickname':Global.nickname, 'password':data});
     }
     Global.selfDisconnect = function(){
         Global.socket.disconnect();

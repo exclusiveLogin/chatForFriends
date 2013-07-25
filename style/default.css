@@ -61,6 +61,10 @@ body{
     margin:0 auto;
     display:none;
 }
+#authUserPass{
+    margin:0 auto;
+    display:none;
+}
 #chat{
 	background-color:#222;
 	width:440px;
