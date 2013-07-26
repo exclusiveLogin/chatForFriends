@@ -38,9 +38,10 @@ io.configure(function () {
             io.sockets.emit('users',users);
 			};
         socket.on('existUser', function(data){
-            var username = members[socket.id];
+            var username = data.nickname;
             var userPwd = users[username];
-            if(data == userPwd){
+            console.log('username:'+username+'userPwd:'+userPwd+'data:'+data);
+            if(data.password == userPwd){
                 socket.emit('userAccess', 'Вы успешно вошли как '+ username);
                 io.sockets.emit('welcome','К нам входит '+username+'. Добро пожаловать!');
                 io.sockets.emit('cl', {'members':members});

@@ -1,4 +1,55 @@
 $(document).ready(function() {
+    //обработчики диалоговых кнопок--------------------------------------------------------
+    $('#userRegYes').click(function(){
+        $('#userPass').show();//показываем поля пароля
+        $('#userRegAsk').hide();//прячем кнопки
+    });
+    $('#userRegNo').click(function(){
+        $('#userRegistration').hide(1000);//закрываем диалог
+        Global.nickNameSubmit();//заходим
+    });
+    $('#userRegSubmit').click(function() {
+        //Анализ полей пароля и отправка на сервер значения
+        var newUserPass = $('#newUserPass').val();//парсим значение полей в переменные
+        var newUserPassConfirm = $('#newUserPassConfirm').val();
+        if(newUserPass && newUserPass == newUserPassConfirm){//Если пароль введен и равен конфирмации
+            $('#userRegistration').hide(1000);//Прячем диалог регистрации
+            $('#userRegWarn').hide(100);//Прячем предупреждение
+            Global.userRegistration(newUserPass);//Запуск регистрации
+        }
+        else{
+            $('#userRegWarn').show(100);//Показываем что пользователь допустил ошибку или не ввел пароли
+        }                
+    });
+    $('#userRegCancel').click(function() {//делаем тоже что и при отмене
+        $('#userRegistration').hide(1000);//Прячем диалог
+        Global.nickNameSubmit();//заходим
+    });
+    
+    $('#userAuthYes').click(function(){
+        $('#authUserPass').show(1000);//тут мы выводим поля пароля и анализ содержимого
+        $('#userAuthAsk').hide(1000);//прячем кнопки                    
+    });
+    $('#userAuthNo').click(function(){//тут мы закрывааем диалог и делаем выход юзера
+        $('#userAuthorization').hide(1000);//прячем диалог
+        Global.exitSubmit();
+    });
+    $('#userAuthSubmit').click(function() {//тут будет анализ пароля
+        if($('#oldUserPass').val()){
+            var oldUserPass = $('#oldUserPass').val();
+            Global.socket.emit('existUser', {'password':oldUserPass, 'nickname':Global.nickname});
+            $('#userAuthWarn').hide(100);
+            $('#userAuthorization').hide(1000);
+        }
+        else{
+            $('#userAuthWarn').show(100);
+        }
+    });
+    $('#userAuthCancel').click(function() {
+        $('#userAuthorization').hide(1000);//прячем диалог
+        Global.exitSubmit();
+    });
+    //-------------------------------------------------------------------------------
     
     Global.snd_in = $('#msg_sound_in');
     Global.snd_out = $('#msg_sound_out');
