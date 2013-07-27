@@ -30,8 +30,8 @@ collection.find().toArray(function (err, items) {
 	io.sockets.on('connection', function (socket) {		
         var id = socket.id.substring(0,7);
         members[socket.id]='Гость:'+id+'...';
-        io.sockets.emit('cl', {'members':members});
         io.sockets.emit('users',users);
+        io.sockets.emit('cl', {'members':members});
 		socket.on('msg', function(data){
 			io.sockets.emit('send',{'nick':members[socket.id],'msg':data});			
 			});

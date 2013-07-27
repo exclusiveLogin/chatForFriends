@@ -1,8 +1,8 @@
 $(document).ready(function() {
     //обработчики диалоговых кнопок--------------------------------------------------------
     $('#userRegYes').click(function(){
-        $('#userPass').show();//показываем поля пароля
-        $('#userRegAsk').hide();//прячем кнопки
+        $('#userPass').show(1000);//показываем поля пароля
+        $('#userRegAsk').hide(1000);//прячем кнопки
     });
     $('#userRegNo').click(function(){
         $('#userRegistration').hide(1000);//закрываем диалог

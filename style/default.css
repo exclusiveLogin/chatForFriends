@@ -147,7 +147,7 @@ body{
 	width:100%;	
 	}
 .contactUnit{
-	border:#CCC outset 2px;
+	border:#49F outset 2px;
 	border-radius:15px;
 	box-shadow:3px 3px 20px rgba(0,0,0,0.5);
 	width:70%;
@@ -161,17 +161,29 @@ body{
 	}
 .contactUnitGuest{
     border:#CCC outset 2px;
-	border-radius:15px;
+    border-radius:15px;
 	box-shadow:3px 3px 20px rgba(0,0,0,0.5);
 	width:70%;
 	margin:0 auto;
-	color:#333;
+	color:#CCC;
 	text-align:center;
 	margin-top:10px;
 	font-family:Arial;
 	font-weight:bold;
 	font-size:14px;
-    background-color:#DDD;
+	}
+.contactUnitMe{
+    border:#F44 outset 2px;
+    border-radius:15px;
+	box-shadow:3px 3px 20px rgba(0,0,0,0.5);
+	width:70%;
+	margin:0 auto;
+	color:#CCC;
+	text-align:center;
+	margin-top:10px;
+	font-family:Arial;
+	font-weight:bold;
+	font-size:14px;
 	}
 .chatCell{
 	min-width:70%;

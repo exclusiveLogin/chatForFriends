@@ -53,9 +53,9 @@ Global.socket.on('connect', function(){
             'text-shadow':'0 0 5px #0FF',
             'color':'#0FF'
         });
-	if(Global.timer_reconnect){} 
-	else{       
-        Global.timer_reconnect = setTimeout(function() {
+	    if(Global.timer_reconnect){} 
+	    else{       
+            Global.timer_reconnect = setTimeout(function() {
             Global.selfDisconnect();
         	}, 60000);
 		}
@@ -104,19 +104,25 @@ Global.socket.on('connect', function(){
                     Global.snd_out.get(0).play();
                 }
                 else;
-        }
-       
+        }       
         $('#chatBody').append(msg);
         Global.autoscrolling();        
-    });
-    
-    
-    
+    });   
     
     Global.socket.on('cl', function(data){
         $('#contactListBody').empty();
         for(var i in data.members){
-            var contact = '<div class="contactUnit">'+data.members[i]+'</div>';
+            var clas;
+            if(Global.nickname == data.members[i]){
+                clas = 'contactUnitMe';
+            }
+            else if(data.members[i] in Global.users){
+                clas = 'contactUnit';
+            }
+            else{
+                clas = 'contactUnitGuest';
+            }
+            var contact = '<div class="'+clas+'">'+data.members[i]+'</div>';
             $('#contactListBody').append(contact);
         }
         if (data.msg) {
