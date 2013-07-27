@@ -1,6 +1,7 @@
 var io = require('socket.io').listen(Number(process.env.PORT));
 var members={};
 var users={};
+console.log('НОД запущен');
 io.configure(function () {
     io.set('transports', ['websocket'
   , 'flashsocket'
@@ -9,6 +10,22 @@ io.configure(function () {
   , 'jsonp-polling'
 ]);
     //io.set("polling duration", 10); 
+});
+var mongo = require("mongoskin");
+var collection = mongo.db('mongodb://serenity:serenityonline@dharma.mongohq.com:10049/chatforfriends').collection('users');
+collection.find().toArray(function (err, items) {
+  if(!err){
+    console.log('items:'+items);
+    for(var i in items){
+        var pass = items[i].password;
+        var nick = items[i].nickname;
+        users[nick] = pass;
+        console.log('users='+nick+'['+pass+']');
+    }
+  }
+  else{
+    console.log('error:'+err);
+  }
 });
 	io.sockets.on('connection', function (socket) {		
         var id = socket.id.substring(0,7);
@@ -36,14 +53,15 @@ io.configure(function () {
         var userAdd = function(nickname, password){
             users[nickname] = password;
             io.sockets.emit('users',users);
-			};
+            collection.insert({'nickname':nickname,'password':password});
+        }
+            
         socket.on('existUser', function(data){
             var username = data.nickname;
             var userPwd = users[username];
             console.log('username:'+username+'userPwd:'+userPwd+'data:'+data);
             if(data.password == userPwd){
                 socket.emit('userAccess', 'Вы успешно вошли как '+ username);
-                io.sockets.emit('welcome','К нам входит '+username+'. Добро пожаловать!');
                 io.sockets.emit('cl', {'members':members});
             }
             else{

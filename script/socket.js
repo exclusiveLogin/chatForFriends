@@ -19,7 +19,6 @@ if($.browser.webkit){
     }
 Global.socket.on('users', function(users){
         Global.users = users;
-        alert(users[Global.nickname]);
     });
 
 Global.socket.on('connect', function(){
@@ -153,13 +152,8 @@ Global.socket.on('connect', function(){
             '<div class="chatCellBodySys">'+data+
             '</div></div>';
         $('#chatBody').append(msg);
+        Global.nickNameSubmit();
         Global.autoscrolling();
-        $('#nickName').val('');
-        $('#globalFooter').fadeIn(1000);
-        $('#nickNameSubmit').hide(1000);
-        $('#nickName').hide(1000);
-        $('#exitSubmit').show(1000);
-        $('#msgBox').focus();
     });
     
     Global.socket.on('userDenied', function(data){
