@@ -158,6 +158,13 @@ body{
 	font-family:Arial;
 	font-weight:bold;
 	font-size:14px;
+    background-color:#002;
+    -webkit-user-select: none;  /* Chrome all / Safari all */
+    -moz-user-select: none;     /* Firefox all */
+    -ms-user-select: none;      /* IE 10+ */
+    -o-user-select: none;
+    user-select: none;
+    cursor:pointer;
 	}
 .contactUnitGuest{
     border:#CCC outset 2px;
@@ -171,6 +178,12 @@ body{
 	font-family:Arial;
 	font-weight:bold;
 	font-size:14px;
+    -webkit-user-select: none;  /* Chrome all / Safari all */
+    -moz-user-select: none;     /* Firefox all */
+    -ms-user-select: none;      /* IE 10+ */
+    -o-user-select: none;
+    user-select: none;
+    cursor:default;
 	}
 .contactUnitMe{
     border:#F44 outset 2px;
@@ -184,6 +197,13 @@ body{
 	font-family:Arial;
 	font-weight:bold;
 	font-size:14px;
+    background-color:#200;
+    -webkit-user-select: none;  /* Chrome all / Safari all */
+    -moz-user-select: none;     /* Firefox all */
+    -ms-user-select: none;      /* IE 10+ */
+    -o-user-select: none;
+    user-select: none;
+    cursor:default;
 	}
 .contactUnitSelected{
     border:#FF4 outset 2px;
@@ -197,6 +217,13 @@ body{
 	font-family:Arial;
 	font-weight:bold;
 	font-size:14px;
+    background-color:#220;
+    -webkit-user-select: none;  /* Chrome all / Safari all */
+    -moz-user-select: none;     /* Firefox all */
+    -ms-user-select: none;      /* IE 10+ */
+    -o-user-select: none;
+    user-select: none;
+    cursor:pointer;
 	}    
 .chatCell{
 	min-width:70%;
