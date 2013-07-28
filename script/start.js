@@ -1,4 +1,17 @@
 $(document).ready(function() {
+    $('#contactListBody').on('click','.contactUnit', function(){
+        var privNick = $(this).text();
+        $(this).toggleClass('contactUnitSelected');
+        if($(this).hasClass('contactUnitSelected')){
+            Global.priv.push(privNick);
+            console.log('user added:'+privNick);
+        }
+        else{
+            var del = Global.priv.indexOf(privNick);
+            Global.priv.splice(del, 1);
+            console.log('index fo delete:'+del);
+        }     
+    });
     //обработчики диалоговых кнопок--------------------------------------------------------
     $('#userRegYes').click(function(){
         $('#userPass').show(1000);//показываем поля пароля
@@ -53,6 +66,8 @@ $(document).ready(function() {
     
     Global.snd_in = $('#msg_sound_in');
     Global.snd_out = $('#msg_sound_out');
+    
+    
 
     $('#msgSend').mousedown(function(){
 		$(this).addClass('msgSendClick');

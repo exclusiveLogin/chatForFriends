@@ -5,6 +5,7 @@ var Global={};
     Global.timer_reconnect;
     Global.socket;
     Global.users = {};
+    Global.priv = [];
     
     Global.nickNameSend = function(){
         Global.socket.emit('nickname', Global.nickname);        

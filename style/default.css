@@ -149,7 +149,7 @@ body{
 .contactUnit{
 	border:#49F outset 2px;
 	border-radius:15px;
-	box-shadow:3px 3px 20px rgba(0,0,0,0.5);
+	box-shadow:3px 3px 8px rgba(0,100,255,0.4);
 	width:70%;
 	margin:0 auto;
 	color:#CCC;
@@ -175,7 +175,7 @@ body{
 .contactUnitMe{
     border:#F44 outset 2px;
     border-radius:15px;
-	box-shadow:3px 3px 20px rgba(0,0,0,0.5);
+	box-shadow:3px 3px 8px rgba(255,0,0,0.4);
 	width:70%;
 	margin:0 auto;
 	color:#CCC;
@@ -185,6 +185,19 @@ body{
 	font-weight:bold;
 	font-size:14px;
 	}
+.contactUnitSelected{
+    border:#FF4 outset 2px;
+    border-radius:15px;
+    box-shadow:3px 3px 8px rgba(255,255,0,0.4);
+	width:70%;
+	margin:0 auto;
+	color:#CCC;
+	text-align:center;
+	margin-top:10px;
+	font-family:Arial;
+	font-weight:bold;
+	font-size:14px;
+	}    
 .chatCell{
 	min-width:70%;
 	border:#CCC outset 2px;
