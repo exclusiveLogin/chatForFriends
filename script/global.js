@@ -53,7 +53,7 @@ var Global={};
     Global.sendMsg = function(){
         var msg = $('#msgBox').val();
         $('#msgBox').val('');
-        Global.socket.emit('msg', msg);
+        Global.socket.emit('msg', {'msg':msg, 'priv':Global.priv});
     }
     Global.exitSubmit = function(){
         Global.socket.emit('exit');

@@ -85,28 +85,45 @@ Global.socket.on('connect', function(){
     
     Global.socket.on('send', function(data){
         var msg;
-        if (data.nick == Global.nickname) {
-            msg = '<div class="chatCellSelf">'+
-                '<div class="chatCellHeader">Вы пишете:</div>'+
-                '<div class="chatCellBodySelf">'+data.msg+
-                '</div></div>'; 
-                if(Global.soundToggle) {
+        if (data.nick == Global.nickname) {  
+            if(Global.soundToggle) {
                     Global.snd_in.get(0).play();
                 }
-                else;                
+                else;
+            if(data.to){
+                msg = '<div class="chatCellSelf">'+
+                '<div class="chatCellHeader">Вы пишете '+data.to+':</div>'+
+                '<div class="chatCellBodySelf">'+data.msg+
+                '</div></div>';
+            }
+            else{
+                msg = '<div class="chatCellSelf">'+
+                '<div class="chatCellHeader">Вы пишете всем:</div>'+
+                '<div class="chatCellBodySelf">'+data.msg+
+                '</div></div>';
+            }
         }
         else{
-            msg = '<div class="chatCell">'+
-                '<div class="chatCellHeader">'+data.nick+' пишет:</div>'+
-                '<div class="chatCellBody">'+data.msg+
-                '</div></div>';
-                if(Global.soundToggle) {
+            if(Global.soundToggle) {
                     Global.snd_out.get(0).play();
                 }
                 else;
+            if(data.to == Global.nickname){
+                msg = '<div class="chatCellSelf">'+
+                '<div class="chatCellHeader">'+data.nick+' пишет Вам:</div>'+
+                '<div class="chatCellBodySelf">'+data.msg+
+                '</div></div>';
+            }
+            else{
+                msg = '<div class="chatCellSelf">'+
+                '<div class="chatCellHeader">'+data.nick+' пишет всем:</div>'+
+                '<div class="chatCellBodySelf">'+data.msg+
+                '</div></div>';
+            }
         }       
         $('#chatBody').append(msg);
-        Global.autoscrolling();        
+        Global.autoscrolling();
+        
     });   
     
     Global.socket.on('cl', function(data){
