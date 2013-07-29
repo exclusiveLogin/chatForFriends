@@ -33,7 +33,25 @@ collection.find().toArray(function (err, items) {
         io.sockets.emit('users',users);
         io.sockets.emit('cl', {'members':members});
 		socket.on('msg', function(data){
-			io.sockets.emit('send',{'nick':members[socket.id],'msg':data});			
+            if(data.priv.length > 0){
+                for(var i in data.priv){
+                    var name = data.priv[i];
+                    console.log('name:'+name);
+                    var sock;
+                    for (var j in members) {
+                        if(members[j] == name){
+                            sock = j;
+                            console.log('socket:'+sock);
+                            io.sockets.sockets[sock].emit('send',{'nick':members[socket.id],'msg':data.msg,'to':name});
+                            io.sockets.sockets[socket.id].emit('send',{'nick':members[socket.id],'msg':data.msg,'to':name});
+                        }
+                        else;
+                    }                    
+                }
+            }
+            else{
+                io.sockets.emit('send',{'nick':members[socket.id],'msg':data.msg});
+            }
 			});
         socket.on('exit', function(){
             var userDis = members[socket.id];
