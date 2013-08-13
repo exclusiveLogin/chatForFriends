@@ -109,15 +109,15 @@ Global.socket.on('connect', function(){
                 }
                 else;
             if(data.to == Global.nickname){
-                msg = '<div class="chatCellSelf">'+
+                msg = '<div class="chatCell">'+
                 '<div class="chatCellHeader">'+data.nick+' пишет Вам:</div>'+
-                '<div class="chatCellBodySelf">'+data.msg+
+                '<div class="chatCellBody">'+data.msg+
                 '</div></div>';
             }
             else{
-                msg = '<div class="chatCellSelf">'+
+                msg = '<div class="chatCell">'+
                 '<div class="chatCellHeader">'+data.nick+' пишет всем:</div>'+
-                '<div class="chatCellBodySelf">'+data.msg+
+                '<div class="chatCellBody">'+data.msg+
                 '</div></div>';
             }
         }       
