@@ -139,7 +139,7 @@ Global.socket.on('connect', function(){
             else{
                 clas = 'contactUnitGuest';
             }
-            var contact = '<div class="'+clas+'">'+data.members[i]+'</div>';
+            var contact = '<div class="'+clas+'">'+data.members[i]+'</div><div class="typing" id="'+data.members[i]+'_type"></div>';
             $('#contactListBody').append(contact);
         }
         if (data.msg) {
@@ -186,5 +186,17 @@ Global.socket.on('connect', function(){
             '</div></div>';
         $('#chatBody').append(msg);
         Global.autoscrolling(); 
+    });
+    Global.socket.on('userTyping', function(data){
+        $(document).ready(function() {
+            var unitIdWhoTyping = data.nickname+'_type';
+            if(data.status == true){
+                $('#'+unitIdWhoTyping).show(500);
+            }
+            else{
+                $('#'+unitIdWhoTyping).hide(500);
+            }
+            
+        });
     });
 });

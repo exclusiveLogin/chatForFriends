@@ -98,4 +98,12 @@ collection.find().toArray(function (err, items) {
                 io.sockets.emit('users',users);
             }
     		});
+        socket.on('typing',function(data){
+            if(data.status == true){
+                io.sockets.emit('userTyping', {'nickname':data.nickname, 'status': true});
+            }
+    		else{
+        	    io.sockets.emit('userTyping', {'nickname':data.nickname, 'status': false});
+    		}
+			});
   	});

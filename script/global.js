@@ -29,13 +29,13 @@ var Global={};
         }
     }
     Global.userAsk = function(){
-        $('#userRegistration').show(1000);//показываем диалог
+        $('#userRegistration').show(500);//показываем диалог
         $('#userRegAsk').show();//показываем вопрос
     }
     Global.userAuth = function(){
         $('#authUserPass').hide();//Прячем поля на всякий случай
-        $('#userAuthorization').show(1000);//показываем диалог авторизации            
-        $('#userAuthAsk').show(1000);//показываем кнопки
+        $('#userAuthorization').show(500);//показываем диалог авторизации            
+        $('#userAuthAsk').show(500);//показываем кнопки
     }
     Global.userRegistration = function(data){
         Global.socket.emit('registrationUser', {'nickname':Global.nickname, 'password':data});

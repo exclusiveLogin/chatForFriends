@@ -9,16 +9,16 @@ $(document).ready(function() {
         else{
             var del = Global.priv.indexOf(privNick);
             Global.priv.splice(del, 1);
-            console.log('index fo delete:'+del);
+            console.log('index of delete:'+del);
         }     
     });
     //обработчики диалоговых кнопок--------------------------------------------------------
     $('#userRegYes').click(function(){
-        $('#userPass').show(1000);//показываем поля пароля
-        $('#userRegAsk').hide(1000);//прячем кнопки
+        $('#userPass').show(500);//показываем поля пароля
+        $('#userRegAsk').hide(500);//прячем кнопки
     });
     $('#userRegNo').click(function(){
-        $('#userRegistration').hide(1000);//закрываем диалог
+        $('#userRegistration').hide(500);//закрываем диалог
         Global.nickNameSubmit();//заходим
     });
     $('#userRegSubmit').click(function() {
@@ -26,7 +26,7 @@ $(document).ready(function() {
         var newUserPass = $('#newUserPass').val();//парсим значение полей в переменные
         var newUserPassConfirm = $('#newUserPassConfirm').val();
         if(newUserPass && newUserPass == newUserPassConfirm){//Если пароль введен и равен конфирмации
-            $('#userRegistration').hide(1000);//Прячем диалог регистрации
+            $('#userRegistration').hide(500);//Прячем диалог регистрации
             $('#userRegWarn').hide(100);//Прячем предупреждение
             Global.userRegistration(newUserPass);//Запуск регистрации
         }
@@ -35,16 +35,16 @@ $(document).ready(function() {
         }                
     });
     $('#userRegCancel').click(function() {//делаем тоже что и при отмене
-        $('#userRegistration').hide(1000);//Прячем диалог
+        $('#userRegistration').hide(500);//Прячем диалог
         Global.nickNameSubmit();//заходим
     });
     
     $('#userAuthYes').click(function(){
-        $('#authUserPass').show(1000);//тут мы выводим поля пароля и анализ содержимого
-        $('#userAuthAsk').hide(1000);//прячем кнопки                    
+        $('#authUserPass').show(500);//тут мы выводим поля пароля и анализ содержимого
+        $('#userAuthAsk').hide(500);//прячем кнопки                    
     });
     $('#userAuthNo').click(function(){//тут мы закрывааем диалог и делаем выход юзера
-        $('#userAuthorization').hide(1000);//прячем диалог
+        $('#userAuthorization').hide(500);//прячем диалог
         Global.exitSubmit();
     });
     $('#userAuthSubmit').click(function() {//тут будет анализ пароля
@@ -52,14 +52,14 @@ $(document).ready(function() {
             var oldUserPass = $('#oldUserPass').val();
             Global.socket.emit('existUser', {'password':oldUserPass, 'nickname':Global.nickname});
             $('#userAuthWarn').hide(100);
-            $('#userAuthorization').hide(1000);
+            $('#userAuthorization').hide(500);
         }
         else{
             $('#userAuthWarn').show(100);
         }
     });
     $('#userAuthCancel').click(function() {
-        $('#userAuthorization').hide(1000);//прячем диалог
+        $('#userAuthorization').hide(500);//прячем диалог
         Global.exitSubmit();
     });
     //-------------------------------------------------------------------------------
@@ -117,6 +117,7 @@ $(document).ready(function() {
     $('#msgSend').click(function(){
         if($('#msgBox').val()){
            Global.sendMsg();
+           Global.socket.emit('typing',{'nickname':Global.nickname, 'status':false});
         }
         else;
     });
@@ -124,10 +125,17 @@ $(document).ready(function() {
         if(e.which == 13){
             if($('#msgBox').val()){
                 Global.sendMsg();
+                Global.socket.emit('typing',{'nickname':Global.nickname, 'status':false});
             }
             else;
         }
-        else;
+        else{
+            clearTimeout(timer);
+            Global.socket.emit('typing',{'nickname':Global.nickname, 'status':true});
+            var timer = setTimeout(function() {
+                Global.socket.emit('typing',{'nickname':Global.nickname, 'status':false});
+            }, 3000);
+        }
     });
     $('#exitSubmit').click(function() {
         Global.exitSubmit();
@@ -140,6 +148,4 @@ $(document).ready(function() {
         $(this).toggleClass('autoscrollOn');
         Global.soundToggle=!Global.soundToggle;
     });
-    
-    
 });
