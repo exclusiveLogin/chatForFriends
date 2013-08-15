@@ -445,11 +445,13 @@ body{
 }
 #fork{
     background-image:url(git.png);
-    width:216px;
-    height:216px;
+    width:150px;
+    height:150px;
     position:fixed;
-    right:-30px;
-    top:-30px;
+    right:-25px;
+    top:-25px;
+    background-size:cover;
+    background-repeat:no-repeat;
 }
 .warningText{
     color:red;
