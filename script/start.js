@@ -1,4 +1,10 @@
 $(document).ready(function() {
+    
+    if(jQuery.browser.mobile){
+        window.location.replace("http://chatforfriends.mi.su/mobile/");
+    }
+    else;
+    
     $('#contactListBody').on('click','.contactUnit', function(){
         var privNick = $(this).text();
         $(this).toggleClass('contactUnitSelected');
