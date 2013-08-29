@@ -1,6 +1,6 @@
 $(document).ready(function(){
 if($.browser.webkit){
-        Global.socket = io.connect('http://chatforfriends.serenity.c9.io',{
+        Global.socket = io.connect('http://cff.jit.su',{
             'connect timeout': 60000,
             'reconnect': true,
             'reconnection delay':5000,
@@ -9,7 +9,7 @@ if($.browser.webkit){
         });
     }
     else{
-        Global.socket = io.connect('http://chatforfriends.serenity.c9.io',{
+        Global.socket = io.connect('http://cff.jit.su',{
             'connect timeout': 60000,
             'reconnect': true,
             'reconnection delay':5000,
