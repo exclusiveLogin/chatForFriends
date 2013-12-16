@@ -29,7 +29,7 @@ collection.find().toArray(function (err, items) {
 });
 	io.sockets.on('connection', function (socket) {		
         var id = socket.id.substring(0,7);
-        members[socket.id]='Гость:'+id+'...';
+        members[socket.id]={'nickname':'Гость:'+id+'...','client':'unknown'};
         io.sockets.emit('users',users);
         io.sockets.emit('cl', {'members':members});
 		socket.on('msg', function(data){
@@ -43,7 +43,6 @@ collection.find().toArray(function (err, items) {
                             sock = j;
                             console.log('socket:'+sock);
                             io.sockets.sockets[sock].emit('send',{'nick':members[socket.id],'msg':data.msg,'to':name});
-                            io.sockets.sockets[socket.id].emit('send',{'nick':members[socket.id],'msg':data.msg,'to':name});
                         }
                         else;
                     }                    
@@ -54,17 +53,17 @@ collection.find().toArray(function (err, items) {
             }
 			});
         socket.on('exit', function(){
-            var userDis = members[socket.id];
-            members[socket.id]='Гость:'+id+'...';
-            io.sockets.emit('cl', {'members':members,'msg':userDis+' выходит, его новый ник: '+members[socket.id]});
+            var userDis = members[socket.id].nickname;
+            members[socket.id].nickname='Гость:'+id+'...';
+            io.sockets.emit('cl', {'members':members,'msg':userDis+' выходит, его новый ник: '+members[socket.id].nickname});
 			});
 		socket.on('nickname',function(data){
-			members[socket.id]=data;
-			io.sockets.emit('welcome','К нам входит '+data+'. Добро пожаловать!');
+			members[socket.id]={'nickname':data.nickname,'client':data.client};
+			io.sockets.emit('welcome','К нам входит '+data.nickname+'. Добро пожаловать!');
             io.sockets.emit('cl', {'members':members});
 			});
         socket.on('disconnect',function(){
-            var userDis = members[socket.id];
+            var userDis = members[socket.id].nickname;
             delete members[socket.id];
             io.sockets.emit('cl', {'members':members,'msg':userDis+' покидает нас..:('});
 			});
@@ -93,7 +92,7 @@ collection.find().toArray(function (err, items) {
             else{
                 userAdd(data.nickname, data.password);
                 io.sockets.emit('welcome','Регистрация нового пользователя прошла успешно. '+data.nickname+' Добро пожаловать!');
-                members[socket.id]=data.nickname;
+                members[socket.id].nickname=data.nickname;
                 io.sockets.emit('cl', {'members':members});
                 io.sockets.emit('users',users);
             }

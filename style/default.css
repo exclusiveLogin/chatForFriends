@@ -160,7 +160,7 @@ body{
 	border:#49F outset 2px;
 	border-radius:15px;
 	box-shadow:3px 3px 8px rgba(0,100,255,0.4);
-	width:70%;
+	width:90%;
 	margin:0 auto;
 	color:#CCC;
 	text-align:center;
@@ -175,12 +175,14 @@ body{
     -o-user-select: none;
     user-select: none;
     cursor:pointer;
+    padding-left:10px;
+    line-height:22px;
 	}
 .contactUnitGuest{
     border:#CCC outset 2px;
     border-radius:15px;
 	box-shadow:3px 3px 20px rgba(0,0,0,0.5);
-	width:70%;
+	width:90%;
 	margin:0 auto;
 	color:#CCC;
 	text-align:center;
@@ -194,12 +196,14 @@ body{
     -o-user-select: none;
     user-select: none;
     cursor:default;
+    padding-left:10px;
+    line-height:22px;
 	}
 .contactUnitMe{
     border:#F44 outset 2px;
     border-radius:15px;
 	box-shadow:3px 3px 8px rgba(255,0,0,0.4);
-	width:70%;
+	width:90%;
 	margin:0 auto;
 	color:#CCC;
 	text-align:center;
@@ -214,12 +218,14 @@ body{
     -o-user-select: none;
     user-select: none;
     cursor:default;
+    padding-left:10px;
+    line-height:22px;
 	}
 .contactUnitSelected{
     border:#FF4 outset 2px;
     border-radius:15px;
     box-shadow:3px 3px 8px rgba(255,255,0,0.4);
-	width:70%;
+	width:90%;
 	margin:0 auto;
 	color:#CCC;
 	text-align:center;
@@ -234,7 +240,25 @@ body{
     -o-user-select: none;
     user-select: none;
     cursor:pointer;
-	}    
+    padding-left:10px;
+    line-height:22px;
+	}
+.mobile_client{
+    background-image:url(mobile_logo.png);
+    background-repeat:no-repeat;
+    position:absolute;
+    width:20px;
+    height:20px;
+    margin-top:2px;
+}
+.desktop_client{
+    background-image:url(desktop_logo.png);
+    background-repeat:no-repeat;
+    position:absolute;
+    width:20px;
+    height:20px;
+    margin-top:2px;
+}
 .chatCell{
 	min-width:70%;
 	border:#CCC outset 2px;

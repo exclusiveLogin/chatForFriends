@@ -1,6 +1,6 @@
 $(document).ready(function(){
 if($.browser.webkit){
-        Global.socket = io.connect('http://cff.jit.su',{
+        Global.socket = io.connect('https://chatforfriends-c9-serenity.c9.io',{
             'connect timeout': 60000,
             'reconnect': true,
             'reconnection delay':5000,
@@ -9,7 +9,7 @@ if($.browser.webkit){
         });
     }
     else{
-        Global.socket = io.connect('http://cff.jit.su',{
+        Global.socket = io.connect('https://chatforfriends-c9-serenity.c9.io',{
             'connect timeout': 60000,
             'reconnect': true,
             'reconnection delay':5000,
@@ -54,7 +54,7 @@ Global.socket.on('connect', function(){
             'color':'#0FF'
         });
 	    if(Global.timer_reconnect){} 
-	    else{       
+	    else{
             Global.timer_reconnect = setTimeout(function() {
             Global.selfDisconnect();
         	}, 60000);
@@ -110,13 +110,13 @@ Global.socket.on('connect', function(){
                 else;
             if(data.to == Global.nickname){
                 msg = '<div class="chatCell">'+
-                '<div class="chatCellHeader">'+data.nick+' пишет Вам:</div>'+
+                '<div class="chatCellHeader">'+data.nick.nickname+' пишет Вам:</div>'+
                 '<div class="chatCellBody">'+data.msg+
                 '</div></div>';
             }
             else{
                 msg = '<div class="chatCell">'+
-                '<div class="chatCellHeader">'+data.nick+' пишет всем:</div>'+
+                '<div class="chatCellHeader">'+data.nick.nickname+' пишет всем:</div>'+
                 '<div class="chatCellBody">'+data.msg+
                 '</div></div>';
             }
@@ -130,16 +130,32 @@ Global.socket.on('connect', function(){
         $('#contactListBody').empty();
         for(var i in data.members){
             var clas;
-            if(Global.nickname == data.members[i]){
+            if(Global.nickname == data.members[i].nickname){
                 clas = 'contactUnitMe';
             }
-            else if(data.members[i] in Global.users){
+            else if(data.members[i].nickname in Global.users){
                 clas = 'contactUnit';
             }
             else{
                 clas = 'contactUnitGuest';
             }
-            var contact = '<div class="'+clas+'">'+data.members[i]+'</div><div class="typing" id="'+data.members[i]+'_type"></div>';
+            
+            var client;
+            if(data.members[i].client=='desktop'){
+                client='<div class="desktop_client"></div>';
+                
+            }else if(data.members[i].client=='mobile'){
+                client='<div class="mobile_client"></div>';
+                
+            }else{
+                client='';
+            }
+            
+            
+            var contact = '<div class="'+clas+'">'+client+
+            data.members[i].nickname+'</div><div class="typing" id="'+
+            data.members[i].nickname+'_type"></div>';
+            
             $('#contactListBody').append(contact);
         }
         if (data.msg) {

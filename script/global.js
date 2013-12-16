@@ -6,9 +6,10 @@ var Global={};
     Global.socket;
     Global.users = {};
     Global.priv = [];
+    Global.client="desktop";
     
     Global.nickNameSend = function(){
-        Global.socket.emit('nickname', Global.nickname);        
+        Global.socket.emit('nickname', {'nickname':Global.nickname, 'client':Global.client});
     }
     Global.nickNameSubmit = function(){
         $('#nickName').val('');
