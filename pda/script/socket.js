@@ -149,7 +149,7 @@ Global.socket.on('connect', function(){
                 msg = '<div class="chatCell">'+
                             '<table class="cellContain">'+
                                 '<tr>'+
-                                    '<td class="vizitka">'+data.nick.nickname+' пишет Вам<br>'+
+                                    '<td class="vizitka">'+data.nick+' пишет Вам<br>'+
                                     '<div class="iconContact"></div>'+
                                     '<span class="time">'+Global.day+'.'+Global.month+'.'+Global.year+
                                     '<br>'+Global.timeHours+':'+Global.timeMinutes+':'+Global.timeSeconds+
@@ -163,7 +163,7 @@ Global.socket.on('connect', function(){
                 msg = '<div class="chatCell">'+
                             '<table class="cellContain">'+
                                 '<tr>'+
-                                    '<td class="vizitka">'+data.nick.nickname+' пишет<br>'+
+                                    '<td class="vizitka">'+data.nick+' пишет<br>'+
                                     '<div class="iconContact"></div>'+
                                     '<span class="time">'+Global.day+'.'+Global.month+'.'+Global.year+
                                     '<br>'+Global.timeHours+':'+Global.timeMinutes+':'+Global.timeSeconds+

@@ -9,7 +9,6 @@
     Global.sendBtnRefresh();
     
     //$('#btnSend').button();
-    
     /*if(!jQuery.browser.mobile){
         window.location.replace("http://chatforfriends.mi.su");
     }
@@ -238,5 +237,13 @@
                 Global.socket.emit('typing',{'nickname':Global.nickname, 'status':false});
             }, 3000);*/
         }
+    });
+    
+    $('#btnSend').click(function(){
+        if($('#msgBox').val()){
+           Global.sendMsg();
+           //Global.socket.emit('typing',{'nickname':Global.nickname, 'status':false});
+        }
+        else;
     });
 });

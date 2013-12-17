@@ -49,7 +49,7 @@ collection.find().toArray(function (err, items) {
                 }
             }
             else{
-                io.sockets.emit('send',{'nick':members[socket.id],'msg':data.msg});
+                io.sockets.emit('send',{'nick':members[socket.id].nickname,'msg':data.msg});
             }
 			});
         socket.on('exit', function(){

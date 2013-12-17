@@ -110,13 +110,13 @@ Global.socket.on('connect', function(){
                 else;
             if(data.to == Global.nickname){
                 msg = '<div class="chatCell">'+
-                '<div class="chatCellHeader">'+data.nick.nickname+' пишет Вам:</div>'+
+                '<div class="chatCellHeader">'+data.nick+' пишет Вам:</div>'+
                 '<div class="chatCellBody">'+data.msg+
                 '</div></div>';
             }
             else{
                 msg = '<div class="chatCell">'+
-                '<div class="chatCellHeader">'+data.nick.nickname+' пишет всем:</div>'+
+                '<div class="chatCellHeader">'+data.nick+' пишет всем:</div>'+
                 '<div class="chatCellBody">'+data.msg+
                 '</div></div>';
             }
