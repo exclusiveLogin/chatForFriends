@@ -1,0 +1,244 @@
+#btnSend{
+    display:none;
+    }
+.headpanel{
+    border-bottom:1px solid #999;
+    }
+
+.bg{
+    background-color:#333;
+    }
+#contactContain{
+    background-color:#222;
+    padding:10px;
+}
+.chatCell{
+    width:100%;
+	border-bottom:#666 solid 1px;
+	/*background-color:#EEE;*/
+	}
+.cellContain{
+    width:100%;
+    min-height:50px;
+    border:0;
+    padding:0;
+    border-spacing:0;
+}
+.vizitka{
+    width:30%;
+    border-right:1px solid #222;
+    text-align:center;
+    font-size:15px;
+    }
+.vizitkaSelf{
+    width:30%;
+    border-right:1px solid #222;
+    text-align:center;
+    font-size:15px;
+    }
+.vizitkaSys{
+    width:30%;
+    border-right:1px solid #222;
+    text-align:center;
+    font-size:15px;
+    }
+.cellMsg{
+    text-align:center;
+    width:70%;
+    padding:15px;
+    color:#5F5;
+    }
+.cellMsgSelf{
+    text-align:center;
+    width:70%;
+    padding:15px;
+    color:#FF5;
+    }
+.cellMsgSys{
+    text-align:center;
+    width:70%;
+    padding:15px;
+    color:#F55;
+    }
+.time{
+    font-size:10px;
+    /*color:#333;*/
+}
+.iconContactSelf{
+    background-image:url(iconSelf.png);
+    width:40px;
+    height:40px;
+    background-size:cover;
+    background-repeat:no-repeat;
+    margin:0 auto;
+}
+.iconContactMale{
+    background-image:url(iconMale.png);
+    width:40px;
+    height:35px;
+    background-size:cover;
+    background-repeat:no-repeat;
+    margin:0 auto;
+}
+.iconContactFemale{
+    background-image:url(iconFemale.png);
+    width:40px;
+    height:35px;
+    background-size:cover;
+    background-repeat:no-repeat;
+    margin:0 auto;
+}
+.iconContact{
+    background-image:url(iconDialog.png);
+    width:45px;
+    height:45px;
+    background-size:cover;
+    background-repeat:no-repeat;
+    margin:0 auto;
+}
+.iconContactSystem{
+    background-image:url(iconSystem.png);
+    width:40px;
+    height:40px;
+    background-size:cover;
+    background-repeat:no-repeat;
+    margin:0 auto;
+}
+.contactUnit{
+    border:#49F outset 2px;
+	border-radius:5px;
+	box-shadow:3px 3px 8px rgba(0,100,255,0.4);
+	width:90%;
+	margin:0 auto;
+	color:#CCC;
+	text-align:center;
+	margin-bottom:15px;
+	font-family:Arial;
+	font-weight:bold;
+	font-size:18px;
+    background-color:#002;
+    -webkit-user-select: none;  /* Chrome all / Safari all */
+    -moz-user-select: none;     /* Firefox all */
+    -ms-user-select: none;      /* IE 10+ */
+    -o-user-select: none;
+    user-select: none;
+    cursor:pointer;
+    padding-left:10px;
+    line-height:22px;
+	}
+.contactUnitGuest{
+    border:#CCC outset 2px;
+    border-radius:5px;
+	box-shadow:3px 3px 20px rgba(0,0,0,0.5);
+	width:90%;
+	margin:0 auto;
+	color:#CCC;
+	text-align:center;
+	margin-bottom:15px;
+	font-family:Arial;
+	font-weight:bold;
+	font-size:18px;
+    -webkit-user-select: none;  /* Chrome all / Safari all */
+    -moz-user-select: none;     /* Firefox all */
+    -ms-user-select: none;      /* IE 10+ */
+    -o-user-select: none;
+    user-select: none;
+    cursor:default;
+    padding-left:10px;
+    line-height:22px;
+	}
+.contactUnitMe{
+    border:#F44 outset 2px;
+    border-radius:5px;
+	box-shadow:3px 3px 8px rgba(255,0,0,0.4);
+	width:90%;
+	margin:0 auto;
+	color:#CCC;
+	text-align:center;
+	margin-bottom:15px;
+	font-family:Arial;
+	font-weight:bold;
+	font-size:18px;
+    background-color:#200;
+    -webkit-user-select: none;  /* Chrome all / Safari all */
+    -moz-user-select: none;     /* Firefox all */
+    -ms-user-select: none;      /* IE 10+ */
+    -o-user-select: none;
+    user-select: none;
+    cursor:default;
+    padding-left:10px;
+    line-height:22px;
+	}
+.contactUnitSelected{
+    border:#FF4 outset 2px;
+    border-radius:5px;
+    box-shadow:3px 3px 8px rgba(255,255,0,0.4);
+	width:90%;
+	margin:0 auto;
+	color:#CCC;
+	text-align:center;
+	margin-bottom:15px;
+	font-family:Arial;
+	font-weight:bold;
+	font-size:18px;
+    background-color:#220;
+    -webkit-user-select: none;  /* Chrome all / Safari all */
+    -moz-user-select: none;     /* Firefox all */
+    -ms-user-select: none;      /* IE 10+ */
+    -o-user-select: none;
+    user-select: none;
+    cursor:pointer;
+    padding-left:10px;
+    line-height:22px;
+	}
+	
+.mobile_client{
+    background-image:url(mobile_logo.png);
+    background-repeat:no-repeat;
+    position:absolute;
+    width:20px;
+    height:20px;
+    margin-top:2px;
+}
+.desktop_client{
+    background-image:url(desktop_logo.png);
+    background-repeat:no-repeat;
+    position:absolute;
+    width:20px;
+    height:20px;
+    margin-top:2px;
+}
+
+.warningText{
+    color:red;
+}
+#userRegistration{
+    padding:10px;
+}
+#userAuthorization{
+    padding:10px;
+}
+#userAuthSubmit{
+    background-color:#0A0;
+}
+#userRegSubmit{
+    background-color:#0A0;
+}
+#userEnterSubmit{
+    background-color:#0A0;
+}
+#enterSubmit{
+    background-color:#0A0;
+}
+#btnOffline{
+    background-color:#A00;
+}
+#userPass{
+    display:none;
+}
+#authUserPass{
+    display:none;
+}
+#titlePop{
+    padding:20px;
+}
