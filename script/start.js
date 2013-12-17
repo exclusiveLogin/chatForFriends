@@ -1,7 +1,7 @@
 $(document).ready(function() {
     
     if(jQuery.browser.mobile){
-        window.location.replace("http://chatforfriends.mi.su/mobile/");
+        window.location.replace("pda/index.html");
     }
     else;
     
