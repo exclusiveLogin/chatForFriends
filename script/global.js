@@ -7,6 +7,8 @@ var Global={};
     Global.users = {};
     Global.priv = [];
     Global.client="desktop";
+    Global.members;
+    Global.accept=true;
     
     Global.nickNameSend = function(){
         Global.socket.emit('nickname', {'nickname':Global.nickname, 'client':Global.client});

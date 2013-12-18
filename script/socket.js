@@ -127,6 +127,7 @@ Global.socket.on('connect', function(){
     });   
     
     Global.socket.on('cl', function(data){
+        Global.members=data.members;
         $('#contactListBody').empty();
         for(var i in data.members){
             var clas;
@@ -153,8 +154,8 @@ Global.socket.on('connect', function(){
             
             
             var contact = '<div class="'+clas+'">'+client+
-            data.members[i].nickname+'</div><div class="typing" id="'+
-            data.members[i].nickname+'_type"></div>';
+            data.members[i].nickname+'<div class="type_con"><div class="typing" id="'+
+            data.members[i].nickname+'_type"></div></div></div>';
             
             $('#contactListBody').append(contact);
         }

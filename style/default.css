@@ -71,14 +71,20 @@ body{
     margin:0 auto;
     display:none;
 }
+.type_con{
+    width:19px;
+    height:22px;
+    position:relative;
+    right:0;
+    float:right;
+}
 .typing{
     width:19px;
     height:22px;
     background-image:url(type.png);
     background-size:cover;
-    position:relative;
-    float:right;
-    top:-25px;
+    position:absolute;
+    right:0;
     display:none;
 }
 #chat{

@@ -25,7 +25,22 @@ $(document).ready(function() {
     });
     $('#userRegNo').click(function(){
         $('#userRegistration').hide(500);//закрываем диалог
-        Global.nickNameSubmit();//заходим
+        for(var i in Global.members){
+            if(Global.nickname==Global.members[i].nickname){//Если такой ник есть в КЛ то выдаем предупреждение
+                alert("Совпадение ников");
+                Global.accept=false;
+                Global.exitSubmit();
+            }
+            else{
+                Global.accept=true;
+            };
+        }
+        if(Global.accept){
+            Global.nickNameSubmit();//заходим
+        }
+        else{//иначе не заходим
+            Global.exitSubmit();
+        }
     });
     $('#userRegSubmit').click(function() {
         //Анализ полей пароля и отправка на сервер значения
@@ -97,7 +112,7 @@ $(document).ready(function() {
                 Global.nickname = Global.nickname.substring(0 ,12)+'...';
                 alert(Global.nickname);
             }
-            else;   
+            else; 
             Global.userCheck();
         }
         else;
