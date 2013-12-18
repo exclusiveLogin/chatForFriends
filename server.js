@@ -39,10 +39,11 @@ collection.find().toArray(function (err, items) {
                     console.log('name:'+name);
                     var sock;
                     for (var j in members) {
-                        if(members[j] == name){
+                        if(members[j].nickname == name){
                             sock = j;
                             console.log('socket:'+sock);
-                            io.sockets.sockets[sock].emit('send',{'nick':members[socket.id],'msg':data.msg,'to':name});
+                            io.sockets.sockets[sock].emit('send',{'nick':members[socket.id].nickname,'msg':data.msg,'to':name});
+                            io.sockets.sockets[socket.id].emit('send',{'nick':members[socket.id].nickname,'msg':data.msg,'to':name});
                         }
                         else;
                     }                    
