@@ -30,6 +30,7 @@ $(document).ready(function() {
                 alert("Совпадение ников");
                 Global.accept=false;
                 Global.exitSubmit();
+                break;
             }
             else{
                 Global.accept=true;

@@ -7,7 +7,7 @@ var Global={};
     Global.users = {};
     Global.priv = [];
     Global.client="desktop";
-    Global.members;
+    Global.members={};
     Global.accept=true;
     
     Global.nickNameSend = function(){
