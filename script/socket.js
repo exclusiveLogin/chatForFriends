@@ -203,6 +203,7 @@ Global.socket.on('connect', function(){
             '</div></div>';
         $('#chatBody').append(msg);
         Global.autoscrolling(); 
+        Global.exitSubmit();
     });
     Global.socket.on('userTyping', function(data){
         $(document).ready(function() {

@@ -59,6 +59,13 @@ collection.find().toArray(function (err, items) {
             io.sockets.emit('cl', {'members':members,'msg':userDis+' выходит, его новый ник: '+members[socket.id].nickname});
 			});
 		socket.on('nickname',function(data){
+		    for(var i in members){
+		        if(members[i].nickname==data.nickname){
+		          io.sockets.sockets[i].emit('userDenied','Выполнен удаленный вход');
+		          break;
+		        }
+		        else;
+		    }
 			members[socket.id]={'nickname':data.nickname,'client':data.client};
 			io.sockets.emit('welcome','К нам входит '+data.nickname+'. Добро пожаловать!');
             io.sockets.emit('cl', {'members':members});
