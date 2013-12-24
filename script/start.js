@@ -1,5 +1,13 @@
 $(document).ready(function() {
     
+    //theme roller
+    $('#light_theme').click(function(){
+        $('link').attr('href','style/light.css');
+    });
+     $('#dark_theme').click(function(){
+        $('link').attr('href','style/default.css');
+    });
+    
     if(jQuery.browser.mobile){
         window.location.replace("pda/index.html");
     }
