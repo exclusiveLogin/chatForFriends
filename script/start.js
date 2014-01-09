@@ -1,17 +1,19 @@
 $(document).ready(function() {
     
-    //theme roller
-    $('#light_theme').click(function(){
-        $('link').attr('href','style/light.css');
-    });
-     $('#dark_theme').click(function(){
-        $('link').attr('href','style/default.css');
-    });
-    
     if(jQuery.browser.mobile){
         window.location.replace("pda/index.html");
     }
     else;
+    
+    //включааем тему
+    Global.themeRoll(1);
+    
+    $('#dark_theme').click(function() {
+        Global.themeRoll(1);
+    });
+    $('#light_theme').click(function() {
+        Global.themeRoll(2);
+    });
     
     $('#contactListBody').on('click','.contactUnit', function(){
         var privNick = $(this).text();

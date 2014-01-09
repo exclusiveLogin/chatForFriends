@@ -92,12 +92,16 @@ Global.socket.on('connect', function(){
                 else;
             if(data.to){
                 msg = '<div class="chatCellSelf">'+
+                '<div class="timeStampSelf">'+Global.day+'.'+Global.month+'.'+Global.year+
+                '<br>'+Global.timeHours+':'+Global.timeMinutes+'</div>'+
                 '<div class="chatCellHeader">Вы пишете '+data.to+':</div>'+
                 '<div class="chatCellBodySelf">'+data.msg+
                 '</div></div>';
             }
             else{
                 msg = '<div class="chatCellSelf">'+
+                '<div class="timeStampSelf">'+Global.day+'.'+Global.month+'.'+Global.year+
+                '<br>'+Global.timeHours+':'+Global.timeMinutes+'</div>'+
                 '<div class="chatCellHeader">Вы пишете всем:</div>'+
                 '<div class="chatCellBodySelf">'+data.msg+
                 '</div></div>';
@@ -110,12 +114,16 @@ Global.socket.on('connect', function(){
                 else;
             if(data.to == Global.nickname){
                 msg = '<div class="chatCell">'+
+                '<div class="timeStamp">'+Global.day+'.'+Global.month+'.'+Global.year+
+                '<br>'+Global.timeHours+':'+Global.timeMinutes+'</div>'+
                 '<div class="chatCellHeader">'+data.nick+' пишет Вам:</div>'+
                 '<div class="chatCellBody">'+data.msg+
                 '</div></div>';
             }
             else{
                 msg = '<div class="chatCell">'+
+                '<div class="timeStamp">'+Global.day+'.'+Global.month+'.'+Global.year+
+                '<br>'+Global.timeHours+':'+Global.timeMinutes+'</div>'+
                 '<div class="chatCellHeader">'+data.nick+' пишет всем:</div>'+
                 '<div class="chatCellBody">'+data.msg+
                 '</div></div>';

@@ -1,21 +1,20 @@
 var Global={};
-    Global.nickname;
-    Global.autoscroll = true;
-    Global.soundToggle = true;
-    Global.btnSend = false;
+    Global.nickname;//клиентский никнейм
+    Global.autoscroll = true;//слайдер прокрутки
+    Global.soundToggle = true;//слайдер звука
+    Global.btnSend = false;//слайдер кнопки отправить
     Global.timer_reconnect;
     Global.socket;
     Global.users = {};
     Global.priv = [];
-    Global.title = 'CFF';
-    Global.day;
+    Global.title = 'CFF';//Заголовок окна
+    Global.day;//Переменные Timestamp
     Global.month;
     Global.year;
     Global.timeHours;
     Global.timeMinutes;
     Global.timeSeconds;
-    Global.active = false;
-    Global.client="mobile";
+    Global.client="mobile";//статическая переменная клиента
     
     Global.sendBtnRefresh = function(){
         if(Global.btnSend){

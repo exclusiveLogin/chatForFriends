@@ -1,14 +1,35 @@
 var Global={};
-    Global.nickname;
-    Global.autoscroll = true;
-    Global.soundToggle = true;
+    Global.nickname;//Ник в клиентской части
+    Global.autoscroll = true;//Програмный слайдер автоскрола
+    Global.soundToggle = true;//Програмный слайдер звука
     Global.timer_reconnect;
-    Global.socket;
-    Global.users = {};
-    Global.priv = [];
-    Global.client="desktop";
-    Global.members={};
-    Global.accept=true;
+    Global.socket;//Глобальная переменная сокета
+    Global.users = {};//Массив полученных Reg Users
+    Global.priv = [];//Массив кому пишут в приват
+    Global.client="desktop";//Статическая переменная клиента
+    Global.members={};//Массив сокетов онлайн
+    Global.accept=true;//Compare nick toggle Client Side
+    Global.day;//Переменные Timestamp
+    Global.month;
+    Global.year;
+    Global.timeHours;
+    Global.timeMinutes;
+    Global.timeSeconds;
+    
+    Global.themeRoll = function(selector){
+        //theme roller
+        if(selector == 1){
+            $('link').attr('href','style/default.css');
+            $('#dark_theme').css('background','url(style/dark_btn_selected.png)');
+            $('#light_theme').css('background','url(style/light_btn.png)');
+        }
+        else if(selector == 2){
+            $('link').attr('href','style/light.css');
+            $('#light_theme').css('background','url(style/light_btn_selected.png)');
+            $('#dark_theme').css('background','url(style/dark_btn.png)');
+        }
+        else;
+    }
     
     Global.nickNameSend = function(){
         Global.socket.emit('nickname', {'nickname':Global.nickname, 'client':Global.client});
