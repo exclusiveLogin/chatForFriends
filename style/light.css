@@ -34,34 +34,52 @@ body{
 	padding-bottom:0px;
 	}
 #userRegistration{
-    width:50%;
+    width: 625px;
     background:#CCC;
-    border:2px outset #555;
+    border: 1px solid #777;
     margin:0 auto;
-    border-radius:20px;
-    color:#222;
+    color: #222;
     font-family:Arial;
     padding:10px;
     display:none;
     z-index:9500;
+    font-family: Verdana;
+    text-align: center;
+    box-shadow: 10px 10px 30px rgba(0,0,0,0.3);
 }
 #userAuthorization{
-    width:50%;
+    width: 625px;
     background:#CCC;
-    border:2px outset #555;
+    border: 1px solid #777;
     margin:0 auto;
-    border-radius:20px;
-    color:#222;
+    color: #222;
     font-family:Arial;
     padding:10px;
     display:none;
     z-index:9500;
+    font-family: Verdana;
+    text-align: center;
+    box-shadow: 10px 10px 30px rgba(0,0,0,0.3);
 }
 .pwdInput{
     width:90%;
 }
 #userRegAsk{
     
+}
+#userRegYes{
+    width:100px;
+    font-weight:bold;
+}
+#userRegNo{
+    width:100px;
+}
+#userAuthYes{
+    width:100px;
+    font-weight:bold;
+}
+#userAuthNo{
+    width:100px;
 }
 #userPass{
     margin:0 auto;
@@ -98,8 +116,8 @@ body{
 	background-image:-o-linear-gradient(top,#EEE 0%, #BBB 70%, #CCC 100%);
 	background-image:-ms-linear-gradient(top,#EEE 0%, #BBB 70%, #CCC 100%);
 	background-image:-moz-linear-gradient(top,#EEE 0%, #BBB 70%, #CCC 100%);
-	border:#DDD outset 2px;
-	border-radius:5px 5px 12px 12px;
+	/*border:#DDD outset 2px;
+	border-radius:5px 5px 12px 12px;*/
     display:none;
 	}
 
@@ -141,8 +159,8 @@ body{
 	background-image:-o-linear-gradient(top,#EEE 0%, #BBB 70%, #CCC 100%);
 	background-image:-ms-linear-gradient(top,#EEE 0%, #BBB 70%, #CCC 100%);
 	background-image:-moz-linear-gradient(top,#EEE 0%, #BBB 70%, #CCC 100%);
-	border:#DDD outset 2px;
-	border-radius:5px 5px 12px 12px;
+	/*border:#DDD outset 2px;
+	border-radius:5px 5px 12px 12px;*/
     display:none;
 	}
 #contactListHeader{
@@ -267,7 +285,7 @@ body{
 	right:10px;
 	box-shadow:3px 3px 20px rgba(0,0,0,0.5);
 	z-index:1000;
-	background-color:#EEE;
+	background-color:#EFE;
 	}
 .chatCellSelf{
     width:80%;
@@ -278,7 +296,7 @@ body{
 	z-index:1000;
 	position:relative;
 	float:left;
-	background-color:#EEE;
+	background-color:#EEF;
     }
 .chatCellSys{
     width:96%;
@@ -287,7 +305,7 @@ body{
     float:left;
 	box-shadow:3px 3px 20px rgba(0,0,0,0.5);
 	z-index:1000;
-	background-color:#EEE;
+	background-color:#FEE;
     }
 .chatCellHeader{
 	height:20px;
@@ -347,8 +365,7 @@ body{
 	position:absolute;
 	background-color:#BBB;
 	box-shadow:3px 3px 20px rgba(0,0,0,0.5);
-	border:#999 outset 2px;
-	border-radius:10px;
+	border:#777 solid 1px;
     display:none;
 	}
 #logo{
@@ -384,30 +401,20 @@ body{
 	margin:10px;
 	position:relative;
 	background-color:#CCC;
-	border:#000 1px solid;
+	border:#777 1px solid;
 	color:#222;
 	float:left;
 	}
 #msgSend{
 	width:90px;
 	height:21px;
-	/*background-image:url(bnt_send.png);
-	background-repeat:no-repeat;*/
 	background:#EEE;
 	position:relative;
 	float:left;
 	margin:10px;
 	color:#222;
-	border:1px black solid;
+	border:1px #777 solid;
 	}
-/*#msgSend:hover{
-	background-image:url(bnt_send_hover.png);
-	background-repeat:no-repeat;	
-	}
-.msgSendClick{
-	background-image:url(bnt_send_onclick.png) !important;
-	background-repeat:no-repeat;	
-	}*/
 .miniText{
 	font-size:9px;
 	color:#222;

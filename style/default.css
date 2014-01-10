@@ -415,8 +415,6 @@ body{
 #msgSend{
 	width:90px;
 	height:21px;
-	/*background-image:url(bnt_send.png);
-	background-repeat:no-repeat;*/
 	background:#222;
 	position:relative;
 	float:left;
@@ -424,14 +422,6 @@ body{
 	color:#ddd;
 	border:1px black solid;
 	}
-/*#msgSend:hover{
-	background-image:url(bnt_send_hover.png);
-	background-repeat:no-repeat;	
-	}
-.msgSendClick{
-	background-image:url(bnt_send_onclick.png) !important;
-	background-repeat:no-repeat;	
-	}*/
 .miniText{
 	font-size:9px;
 	color:#999;

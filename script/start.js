@@ -67,6 +67,8 @@ $(document).ready(function() {
         }                
     });
     $('#userRegCancel').click(function() {//делаем тоже что и при отмене
+        $('#userPass').hide(500);//прячем поля пароля
+        $('#userRegAsk').show(500);//показываем кнопки
         $('#userRegistration').hide(500);//Прячем диалог
         Global.nickNameSubmit();//заходим
     });
