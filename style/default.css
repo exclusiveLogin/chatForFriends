@@ -543,3 +543,27 @@ body{
 .dark_theme_selected{
     background:url(dark_btn_selected.png);
 }
+#chatClear{
+    position:fixed;
+    left:5px;
+    top:5px;
+    width:32px;
+    height:32px;
+    background-size:cover;
+    background-image:url(clear.png);
+    content:'Очистить историю';
+    cursor:pointer;
+}
+#topPanel{
+    font-family:Context;
+    font-size:25px;
+    width: 650px;
+    background:#222;
+    border: 1px solid #444;
+    margin:0 auto;
+    color: #ccc;
+    display:none;
+    z-index:9500;
+    text-align: center;
+    box-shadow: 10px 10px 30px rgba(0,0,0,0.3);
+}

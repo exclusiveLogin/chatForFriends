@@ -11,6 +11,7 @@
 <script type="text/javascript" src="node_modules/socket.io/node_modules/socket.io-client/dist/socket.io.js"></script>
 <script type="text/javascript" src="script/detectmobilebrowser.js"></script>
 <script type="text/javascript" src="pda/script/time.js"></script>
+<script type="text/javascript" src="script/history.js"></script>
 <link rel="stylesheet" href="style/default.css">
 </head>
 <body>
@@ -47,6 +48,9 @@
         <input type="button" value="Отмена" id="userAuthCancel">
     </div></center>
 </div>
+<div id="topPanel">
+    <center>PANEL IS UNDER CONSTRUCTION</center>
+</div>
 <div id="globalContainer">
     <div id="globalHeader">
         <div id="logo">ChatForFriends(CFF) v1.0</div>
@@ -64,7 +68,9 @@
             <div id="autoscroll" class="autoscrollOn">автоскролл</div>
             <div id="soundToggle" class="autoscrollOn">звук</div>
         </div>
-        <div id="chatBody"></div>
+        <div id="chatBody">
+            <div id="chatClear"></div>
+        </div>
     </div>
     <div id="contactList">
     	<div id="contactListHeader">Участники чата</div>

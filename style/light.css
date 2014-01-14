@@ -441,9 +441,9 @@ body{
     font-size:10px;
     position:relative;
     top:-1px;
-    background-color:#333;
-    color:#CCC;
-    border:#ccc solid 1px;
+    background-color:#eee;
+    color:#222;
+    border:#777 solid 1px;
 }
 #autoscroll{
     position:absolute;
@@ -482,9 +482,9 @@ body{
     font-size:10px;
     position:relative;
     top:-1px;
-    background-color:#333;
-    color:#CCC;
-    border:#ccc solid 1px;
+    background-color: #eee;
+    color: #222;
+    border: #777 solid 1px;
 }
 #fork{
     background-image:url(git.png);
@@ -535,7 +535,27 @@ body{
 .dark_theme_selected{
     background:url(dark_btn_hover_selected.png);
 }
-body:after{
+#chatClear{
+    position:fixed;
+    left:5px;
+    top:5px;
+    width:32px;
+    height:32px;
+    background-size:cover;
+    background-image:url(clear.png);
+    content:'Очистить историю';
+    cursor:pointer;
+}
+#topPanel{
+    font-family:Context;
+    font-size:25px;
+    width: 650px;
+    background:#ccc;
+    border: 1px solid #444;
+    margin:0 auto;
+    color: #222;
     display:none;
-    content: url(light_btn_hover.png) url(dark_btn_hover.png) url(btn_send_hover.png);
+    z-index:9500;
+    text-align: center;
+    box-shadow: 10px 10px 30px rgba(0,0,0,0.3);
 }
