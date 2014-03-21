@@ -15,6 +15,16 @@ $(document).ready(function() {
         Global.themeRoll(2);
     });
     
+    //Показ панели top_panel
+    $('#panel_tgl').click(function(){
+        if($('#topPanel').is(':visible')){
+            $('#topPanel').fadeOut(500);
+        }
+        else{
+            $('#topPanel').fadeIn(500);
+        }
+    });
+    
     $('#contactListBody').on('click','.contactUnit', function(){
         var privNick = $(this).text();
         $(this).toggleClass('contactUnitSelected');

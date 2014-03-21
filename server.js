@@ -15,7 +15,6 @@ var mongo = require("mongoskin");
 var collection = mongo.db('mongodb://serenity:serenityonline@dharma.mongohq.com:10049/chatforfriends').collection('users');
 collection.find().toArray(function (err, items) {
   if(!err){
-    console.log('items:'+items);
     for(var i in items){
         var pass = items[i].password;
         var nick = items[i].nickname;

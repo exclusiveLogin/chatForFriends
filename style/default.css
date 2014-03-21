@@ -544,15 +544,15 @@ body{
     background:url(dark_btn_selected.png);
 }
 #chatClear{
-    position:fixed;
+    position:relative;
     left:5px;
     top:5px;
     width:32px;
     height:32px;
     background-size:cover;
-    background-image:url(clear.png);
-    content:'Очистить историю';
+    background-image:url(recycleDark.png);
     cursor:pointer;
+    float:left;
 }
 #topPanel{
     font-family:Context;
@@ -566,4 +566,20 @@ body{
     z-index:9500;
     text-align: center;
     box-shadow: 10px 10px 30px rgba(0,0,0,0.3);
+    min-height:40px;
+}
+#under_construction{
+    position:relative;
+    display:inline-block;
+    top:5px;
+}
+#panel_tgl{
+    width:32px;
+    height:32px;
+    position:fixed;
+    top:5px;
+    left:5px;
+    background-image:url(top_panel.png);
+    background-size:cover;
+    cursor:pointer;
 }
