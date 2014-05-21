@@ -34,34 +34,40 @@ body{
 	padding-bottom:0px;
 	}
 #userRegistration{
-    width:50%;
-    background:#222;
-    border:2px outset #555;
+    font-size:14px;
+    font-family:Verdana;
     margin:0 auto;
-    border-radius:20px;
-    color:#CCC;
-    font-family:Arial;
     padding:10px;
     display:none;
-    z-index:9500;
+    text-align: center;
 }
 #userAuthorization{
-    width:50%;
-    background:#222;
-    border:2px outset #555;
+    font-size:14px;
+    font-family:Verdana;
     margin:0 auto;
-    border-radius:20px;
-    color:#CCC;
-    font-family:Arial;
     padding:10px;
     display:none;
-    z-index:9500;
+    text-align: center;
 }
 .pwdInput{
     width:90%;
 }
 #userRegAsk{
     
+}
+#userRegYes{
+    width:100px;
+    font-weight:bold;
+}
+#userRegNo{
+    width:100px;
+}
+#userAuthYes{
+    width:100px;
+    font-weight:bold;
+}
+#userAuthNo{
+    width:100px;
 }
 #userPass{
     margin:0 auto;
@@ -582,4 +588,14 @@ body{
     background-image:url(top_panel.png);
     background-size:cover;
     cursor:pointer;
+}
+#addRoomBtn{
+    width:60px;
+    height:30px;
+    background-image:url(addRoom_dark.png);
+    background-repeat:no-repeat;
+    cursor:pointer;
+    position:absolute;
+    bottom:3px;
+    left:3px;
 }

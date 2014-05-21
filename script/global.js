@@ -16,17 +16,81 @@ var Global={};
     Global.timeMinutes;
     Global.timeSeconds;
     
+    Global.addRoom = function(){
+        $('#addRoomDialog').dialog({
+            autoOpen:false,
+            title:"Создание комнаты",
+            buttons:{
+                "ДА, уверен":function(){
+                    $(this).dialog('close');
+                        },
+                "Отмена":function(){
+                    $(this).dialog('close');
+                        }
+                    },
+            show:"fade",
+            hide:"fade",
+            modal:true,
+            draggable:false,
+            resizable:false
+            });
+    }
+    
+    Global.regDialog = function(){
+        $('#userRegistration').dialog({
+            autoOpen:false,
+            title:"Регистрация",
+            /*buttons:{
+                "ДА, уверен":function(){
+                    $(this).dialog('close');
+                        },
+                "Отмена":function(){
+                    $(this).dialog('close');
+                        }
+                    },*/
+            show:"fade",
+            hide:"fade",
+            modal:true,
+            draggable:false,
+            resizable:false,
+            width:'300'
+            });
+    }
+    
+    Global.authDialog = function(){
+        $('#userAuthorization').dialog({
+            autoOpen:false,
+            title:"Вход",
+            /*buttons:{
+                "ДА, уверен":function(){
+                    $(this).dialog('close');
+                        },
+                "Отмена":function(){
+                    $(this).dialog('close');
+                        }
+                    },*/
+            show:"fade",
+            hide:"fade",
+            modal:true,
+            draggable:false,
+            resizable:false,
+            width:'300'
+            });
+    }
+    
     Global.themeRoll = function(selector){
         //theme roller
         if(selector == 1){
-            $('link').attr('href','style/default.css');
-            $('#dark_theme').css('background','url(style/dark_btn_selected.png)');
-            $('#light_theme').css('background','url(style/light_btn.png)');
+            $('#themeCSS').attr('href','style/dark/dark.css');
+            $('#JQUITheme').attr('href','style/dark/jquery-ui-1.10.4.custom.min.css');
+            $('#dark_theme').css('background','url(style/dark/dark_btn_selected.png)');
+            $('#light_theme').css('background','url(style/light/light_btn.png)');
         }
         else if(selector == 2){
-            $('link').attr('href','style/light.css');
-            $('#light_theme').css('background','url(style/light_btn_selected.png)');
-            $('#dark_theme').css('background','url(style/dark_btn.png)');
+            $('#themeCSS').attr('href','style/light/light.css');
+            $('#JQUITheme').attr('href','style/light/jquery-ui-1.10.4.custom.min.css');
+            $('#light_theme').css('background','url(style/light/light_btn_selected.png)');
+            $('#dark_theme').css('background','url(style/dark/dark_btn.png)');
         }
         else;
     }
@@ -53,12 +117,12 @@ var Global={};
         }
     }
     Global.userAsk = function(){
-        $('#userRegistration').show(500);//показываем диалог
+        $('#userRegistration').dialog('open');//показываем диалог
         $('#userRegAsk').show();//показываем вопрос
     }
     Global.userAuth = function(){
         $('#authUserPass').hide();//Прячем поля на всякий случай
-        $('#userAuthorization').show(500);//показываем диалог авторизации            
+        $('#userAuthorization').dialog('open');//показываем диалог авторизации 
         $('#userAuthAsk').show(500);//показываем кнопки
     }
     Global.userRegistration = function(data){

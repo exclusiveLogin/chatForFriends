@@ -5,6 +5,18 @@ $(document).ready(function() {
     }
     else;
     
+    //Создание диалога
+    Global.addRoom();
+    Global.regDialog();
+    Global.authDialog();
+    
+    $('#addRoomBtn').click(function(){
+        $('#addRoomDialog').dialog('open');
+    });
+    //Открываем диалог(Удалить позже)
+    
+    
+    
     //включааем тему
     Global.themeRoll(1);
     
@@ -44,7 +56,7 @@ $(document).ready(function() {
         $('#userRegAsk').hide(500);//прячем кнопки
     });
     $('#userRegNo').click(function(){
-        $('#userRegistration').hide(500);//закрываем диалог
+        $('#userRegistration').dialog('close');//закрываем диалог
         for(var i in Global.members){
             if(Global.nickname==Global.members[i].nickname){//Если такой ник есть в КЛ то выдаем предупреждение
                 alert("Совпадение ников");
@@ -68,7 +80,7 @@ $(document).ready(function() {
         var newUserPass = $('#newUserPass').val();//парсим значение полей в переменные
         var newUserPassConfirm = $('#newUserPassConfirm').val();
         if(newUserPass && newUserPass == newUserPassConfirm){//Если пароль введен и равен конфирмации
-            $('#userRegistration').hide(500);//Прячем диалог регистрации
+            $('#userRegistration').dialog('close');//Прячем диалог регистрации
             $('#userRegWarn').hide(100);//Прячем предупреждение
             Global.userRegistration(newUserPass);//Запуск регистрации
         }
@@ -79,7 +91,7 @@ $(document).ready(function() {
     $('#userRegCancel').click(function() {//делаем тоже что и при отмене
         $('#userPass').hide(500);//прячем поля пароля
         $('#userRegAsk').show(500);//показываем кнопки
-        $('#userRegistration').hide(500);//Прячем диалог
+        $('#userRegistration').dialog('close');//Прячем диалог
         Global.nickNameSubmit();//заходим
     });
     
@@ -88,7 +100,7 @@ $(document).ready(function() {
         $('#userAuthAsk').hide(500);//прячем кнопки                    
     });
     $('#userAuthNo').click(function(){//тут мы закрывааем диалог и делаем выход юзера
-        $('#userAuthorization').hide(500);//прячем диалог
+        $('#userAuthorization').dialog('close');//прячем диалог
         Global.exitSubmit();
     });
     $('#userAuthSubmit').click(function() {//тут будет анализ пароля
@@ -96,14 +108,14 @@ $(document).ready(function() {
             var oldUserPass = $('#oldUserPass').val();
             Global.socket.emit('existUser', {'password':oldUserPass, 'nickname':Global.nickname});
             $('#userAuthWarn').hide(100);
-            $('#userAuthorization').hide(500);
+            $('#userAuthorization').dialog('close');
         }
         else{
             $('#userAuthWarn').show(100);
         }
     });
     $('#userAuthCancel').click(function() {
-        $('#userAuthorization').hide(500);//прячем диалог
+        $('#userAuthorization').dialog('close');//прячем диалог
         Global.exitSubmit();
     });
     //-------------------------------------------------------------------------------
@@ -133,7 +145,7 @@ $(document).ready(function() {
             if(Global.nickname.length > 15)
             {
                 Global.nickname = Global.nickname.substring(0 ,12)+'...';
-                alert(Global.nickname);
+                alert('Ваш ник сокращен до: '+Global.nickname);
             }
             else; 
             Global.userCheck();

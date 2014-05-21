@@ -34,32 +34,24 @@ body{
 	padding-bottom:0px;
 	}
 #userRegistration{
-    width: 625px;
-    background:#CCC;
-    border: 1px solid #777;
     margin:0 auto;
     color: #222;
-    font-family:Arial;
     padding:10px;
     display:none;
     z-index:9500;
     font-family: Verdana;
     text-align: center;
-    box-shadow: 10px 10px 30px rgba(0,0,0,0.3);
+    font-size:14px;
 }
 #userAuthorization{
-    width: 625px;
-    background:#CCC;
-    border: 1px solid #777;
     margin:0 auto;
     color: #222;
-    font-family:Arial;
     padding:10px;
     display:none;
     z-index:9500;
     font-family: Verdana;
     text-align: center;
-    box-shadow: 10px 10px 30px rgba(0,0,0,0.3);
+    font-size:14px;
 }
 .pwdInput{
     width:90%;
@@ -574,4 +566,14 @@ body{
     background-image:url(top_panel.png);
     background-size:cover;
     cursor:pointer;
+}
+#addRoomBtn{
+    width:60px;
+    height:30px;
+    background-image:url(addRoom_light.png);
+    background-repeat:no-repeat;
+    cursor:pointer;
+    position:absolute;
+    bottom:3px;
+    left:3px;
 }
