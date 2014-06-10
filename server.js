@@ -1,16 +1,42 @@
 var io = require('socket.io').listen(Number(process.env.PORT));
 var members={};
 var users={};
-console.log('НОД запущен');
-io.configure(function () {
-    io.set('transports', ['websocket'
-  , 'flashsocket'
-  , 'htmlfile'
-  , 'xhr-polling'
-  , 'jsonp-polling'
-]);
-    //io.set("polling duration", 10); 
-});
+var rooms={};
+var Glo={};
+
+Glo.clRefresh = function(msg){
+    console.log('DEBUG:cl refreshing');
+    for(var r in io.sockets.adapter.rooms){
+        console.log('Roomslist: '+r);    
+    }
+    Glo.rooms = io.sockets.adapter.rooms['exampleRoom'];
+    
+    //Delete this section later
+    for(var i in Glo.rooms){
+        console.log('Room of '+i+' : '+io.sockets.connected[i].room);
+        console.log('ID:'+i+'  flag: '+Glo.rooms[i]);
+    }
+    
+    console.log(rooms['exampleRoom']);
+    
+    //---------------------------
+    
+    if(msg){//Если есть сообщение
+        io.sockets.emit('cl', {'members':members, 'rooms':Glo.rooms,'msg':msg});
+        console.log('cl with msg sended');
+    }
+    else{//Если нет сообщения
+        io.sockets.emit('cl', {'members':members, 'rooms':Glo.rooms});
+        for(var r in Glo.rooms){
+            if(r){
+                console.log('cl without msg sended');
+            }
+        }
+    }
+}
+
+console.log('Node.js Server is started');
+
 var mongo = require("mongoskin");
 var collection = mongo.db('mongodb://serenity:serenityonline@dharma.mongohq.com:10049/chatforfriends').collection('users');
 collection.find().toArray(function (err, items) {
@@ -26,11 +52,13 @@ collection.find().toArray(function (err, items) {
     console.log('error:'+err);
   }
 });
-	io.sockets.on('connection', function (socket) {		
+	io.sockets.on('connection', function (socket) {
+	    socket.nickname="unauthorized";
         var id = socket.id.substring(0,7);
         members[socket.id]={'nickname':'Гость:'+id+'...','client':'unknown'};
         io.sockets.emit('users',users);
-        io.sockets.emit('cl', {'members':members});
+        Glo.clRefresh();
+        
 		socket.on('msg', function(data){
             if(data.priv.length > 0){
                 for(var i in data.priv){
@@ -55,7 +83,8 @@ collection.find().toArray(function (err, items) {
         socket.on('exit', function(){
             var userDis = members[socket.id].nickname;
             members[socket.id].nickname='Гость:'+id+'...';
-            io.sockets.emit('cl', {'members':members,'msg':userDis+' выходит, его новый ник: '+members[socket.id].nickname});
+            //io.sockets.emit('cl', {'members':members,'msg':userDis+' выходит, его новый ник: '+members[socket.id].nickname});
+            Glo.clRefresh(userDis+' выходит, его новый ник: '+members[socket.id].nickname);
 			});
 		socket.on('nickname',function(data){
 		    for(var i in members){
@@ -66,13 +95,15 @@ collection.find().toArray(function (err, items) {
 		        else;
 		    }
 			members[socket.id]={'nickname':data.nickname,'client':data.client};
+			socket.nickname=data.nickname;
 			io.sockets.emit('welcome','К нам входит '+data.nickname+'. Добро пожаловать!');
-            io.sockets.emit('cl', {'members':members});
+            Glo.clRefresh();
 			});
         socket.on('disconnect',function(){
             var userDis = members[socket.id].nickname;
             delete members[socket.id];
-            io.sockets.emit('cl', {'members':members,'msg':userDis+' покидает нас..:('});
+            //io.sockets.emit('cl', {'members':members,'msg':userDis+' покидает нас..:('});
+            Glo.clRefresh(userDis+' покидает нас..:(');
 			});
         var userAdd = function(nickname, password){
             users[nickname] = password;
@@ -83,10 +114,10 @@ collection.find().toArray(function (err, items) {
         socket.on('existUser', function(data){
             var username = data.nickname;
             var userPwd = users[username];
-            console.log('username:'+username+'userPwd:'+userPwd+'data:'+data);
+            console.log('username:'+username+'userPwd:'+userPwd);
             if(data.password == userPwd){
                 socket.emit('userAccess', 'Вы успешно вошли как '+ username);
-                io.sockets.emit('cl', {'members':members});
+                Glo.clRefresh();
             }
             else{
                 socket.emit('userDenied', 'Ошибка пароля, вход не выполнен');
@@ -100,7 +131,7 @@ collection.find().toArray(function (err, items) {
                 userAdd(data.nickname, data.password);
                 io.sockets.emit('welcome','Регистрация нового пользователя прошла успешно. '+data.nickname+' Добро пожаловать!');
                 members[socket.id].nickname=data.nickname;
-                io.sockets.emit('cl', {'members':members});
+                Glo.clRefresh();
                 io.sockets.emit('users',users);
             }
     		});
@@ -112,4 +143,16 @@ collection.find().toArray(function (err, items) {
         	    io.sockets.emit('userTyping', {'nickname':data.nickname, 'status': false});
     		}
 			});
+		socket.on('addRoom',function(data){
+		    if('exampleRoom' in rooms){
+		        console.log('room is exist');
+		        rooms['exampleRoom']=push(socket.id);
+		    }
+		    else{
+		        rooms['exampleRoom']=socket.id;
+		    }
+		    socket.join('exampleRoom');
+		    socket.room = 'exampleRoom';
+		    Glo.clRefresh();
+		});
   	});

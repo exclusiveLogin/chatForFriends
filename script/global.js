@@ -23,6 +23,7 @@ var Global={};
             buttons:{
                 "ДА, уверен":function(){
                     $(this).dialog('close');
+                    Global.socket.emit('addRoom');
                         },
                 "Отмена":function(){
                     $(this).dialog('close');

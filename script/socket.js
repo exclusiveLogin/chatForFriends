@@ -1,22 +1,7 @@
 $(document).ready(function(){
-if($.browser.webkit){
-        Global.socket = io.connect('https://chat-c9-serenity.c9.io',{
-            'connect timeout': 60000,
-            'reconnect': true,
-            'reconnection delay':5000,
-            'reconnection limit': 60000,
-            'transports':['websocket', 'flashsocket', 'htmlfile', 'xhr-multipart', 'xhr-polling', 'jsonp-polling']
-        });
-    }
-    else{
-        Global.socket = io.connect('https://chat-c9-serenity.c9.io',{
-            'connect timeout': 60000,
-            'reconnect': true,
-            'reconnection delay':5000,
-            'reconnection limit': 60000,
-            'transports':['flashsocket', 'htmlfile', 'xhr-multipart', 'xhr-polling', 'jsonp-polling']
-        });
-    }
+
+Global.socket = io('https://chat-c9-serenity.c9.io');
+
 Global.socket.on('users', function(users){
         Global.users = users;
     });
@@ -167,6 +152,25 @@ Global.socket.on('connect', function(){
             
             $('#contactListBody').append(contact);
         }
+        
+        //Добавление комнаты
+        for(var tRooms in data.rooms){
+            if(tRooms){//Если комната есть
+                $('#contactListBody').append('<div class="roomContainer"><div class="roomHeader">'+tRooms.substring(1)+'</div><div id="'+tRooms.substring(1)+'_room" class="roomBody"></div></div>');
+                //Добавление участников комнаты
+                console.log('users in room:'+data.rooms[tRooms]);
+                var roomUsers = data.rooms[tRooms].toString().split(',');
+                console.log(roomUsers);
+                for(var ri in roomUsers){
+                    $('#'+tRooms.substring(1)+'_room').append('<div class="roomContact">'+roomUsers[ri].substring(0,7)+'...'+'</div>');
+                }
+            }
+            else{
+                
+            }
+        }
+        
+        
         if (data.msg) {
             var msg = '<div class="chatCellSys">'+
             '<div class="chatCellHeader">Системное сообщение</div>'+

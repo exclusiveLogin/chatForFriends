@@ -13,9 +13,8 @@ $(document).ready(function() {
     $('#addRoomBtn').click(function(){
         $('#addRoomDialog').dialog('open');
     });
-    //Открываем диалог(Удалить позже)
     
-    
+
     
     //включааем тему
     Global.themeRoll(1);
